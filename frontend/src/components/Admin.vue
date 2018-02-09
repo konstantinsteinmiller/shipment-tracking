@@ -1,18 +1,18 @@
 <template>
   <div>
     <div>
-      <img src="../assets/logo.png" class="tracking-number__logo">
+      <img src="../assets/logo.png" class="admin__logo">
     </div>
-    <div class="tracking-number-admin">
+    <div class="admin">
       <h1>{{title}}</h1>
-      <div class="tracking-number-admin__panel">
-        <div class="tracking-number__input">
-          <div class="tracking-number__label">Enter tracking number of your shipment</div>
-          <!--<input id="tracking-number-admin" type="text" v-model="trackingNumber" placeholder="e.g. XXXXXXX12313XXXXX01">-->
-          <!--<div v-if="validateTrackingNumber" class="tracking-number__validation-message">A tracking number can only contain alphanumerical numbers and letters</div>-->
+      <div class="admin__panel">
+        <div class="admin__input">
+          <div class="admin__label">Shipment type</div>
+          <input id="admin" type="text" v-model="trackingNumber" placeholder="e.g. XXXXXXX12313XXXXX01">
+          <!--<div v-if="validateTrackingNumber" class="admin__validation-message">A tracking number can only contain alphanumerical numbers and letters</div>-->
         </div>
-        <div class="tracking-number__search-button">
-          <button type="text" @click.native="searchForTrackingNumber">Find shipment<i class="fa fa-search tracking-number__search-button-icon"></i></button>
+        <div class="admin__search-button">
+          <button type="text" @click.native="createTrackingId">Create Tracking Id<i class="fa fa-database admin__submit-button-icon"></i></button>
         </div>
       </div>
     </div>
@@ -57,16 +57,14 @@ export default {
 </script>
 
 <style lang="stylus">
-  .tracking-number-admin
-    &__logo
-      margin-top 2em
+  .admin
     &__panel
       background #f8f8f8
       height auto
       margin 1em
       padding 1em
       border 1px solid #e0e0e0
-    /*&__input
+    &__input
       width 100%
       min-height 1em
       padding 1em 0
@@ -82,7 +80,7 @@ export default {
         font-size 16px
         &::placeholder
           color lightgrey
-    &__search-button
+    &__submit-button
       button
         font-size 16px
         min-width 10em
@@ -95,7 +93,7 @@ export default {
         cursor pointer
         outline-color #ff5050
       &-icon
-        padding-left .5em*/
+        padding-left .5em
     &__label
       margin .5em
     &__validation-message

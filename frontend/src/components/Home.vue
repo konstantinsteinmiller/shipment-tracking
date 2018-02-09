@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div>
-      <img src="../assets/logo.png" class="tracking-number__logo">
-    </div>
+
     <div class="tracking-number">
       <div class="tracking-number__header">
         <h1>{{title}}</h1>
@@ -10,9 +8,16 @@
       </div>
       <div class="tracking-number__panel">
         <div class="tracking-number__input">
-          <div class="tracking-number__label">Enter tracking number of your shipment</div>
-          <input id="tracking-number" type="text" v-model="trackingItem.id" placeholder="XXXXXXX12313XXXXX01">
-          <div v-if="validateTrackingNumber" class="tracking-number__validation-message">A tracking number can only contain alphanumerical numbers and letters</div>
+          <div class="tracking-number__label">
+            Enter tracking number of your shipment
+          </div>
+          <input id="tracking-number" type="text"
+                 v-model="trackingNumber"
+                 placeholder="XXXXXXX12313XXXXX01"
+                 @keyup.enter="searchForTrackingNumber()">
+          <div v-if="validateTrackingNumber"
+               class="tracking-number__validation-message">A tracking number can only contain alphanumerical numbers and letters. Its always {{ trackingNumberMaxLength }} characters long
+          </div>
         </div>
         <div class="tracking-number__search-button">
           <button type="text"
@@ -23,7 +28,7 @@
         </div>
       </div>
       <div class="tracking-number__history">
-        <h3>Status for tracking number {this.trackingItem.id}</h3>
+        <h3>Status for tracking number {{trackingNumber}}</h3>
         <div v-for="(state, index) in trackingItem.states"
              :key="'item_' + state"
              :class="{'tracking-number__history-item--active': trackingItem.states && trackingItem.states[index] && trackingItem.states[index].done}"
@@ -31,6 +36,7 @@
 
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -46,50 +52,48 @@ export default {
     return {
       title: 'Shipment tracking',
       subTitle: 'Track the status of your shipment',
-      trackingItem: { id: 'ASDASDS13123213', states: [] }
+      trackingItem: { id: 'ASDASDS13123213', states: [] },
+      trackingNumberMaxLength: 16,
+      trackingNumber: 'ASDASDS13123213'
     }
   },
   computed: {
     validateTrackingNumber(){
-      const n = this.trackingItem.id;
-      return n && typeof n === 'string' && n.length > 0 && /[^\dA-Za-z]{1,}/.test(n)
+      const n = this.trackingNumber;
+      console.log('n.length: ', n && typeof n === 'string' && n.length > 0 && (n.length < 16),  /[^\dA-Za-z]{1,}/.test(n));
+      return n && typeof n === 'string' && n.length > 0 && (/[^\dA-Za-z]{1,}/.test(n) || (n.length >= this.trackingNumberMaxLength))
     },
     id(){
-      return (this.$route.query && this.$route.query.id) ? this.$route.query.id : '';
+      return (this.$route && this.$route.params && this.$route.params.id) ? this.$route.params.id : '';
     }
   },
   created() {},
   mounted() {
     document.title = 'Shipment tracking'
-    this.trackingItem.id = this.id; //initialize from URL query params
+    this.trackingNumber = this.id; //initialize from URL params
 //    this.searchForTrackingNumber()
     this.onInit();
   },
   methods: {
     onInit(){
-      this.id && this.id !== '' && this.trackingItem.id !== '' && api.getStatus(this.trackingItem.id)
+      this.trackingNumber && this.trackingNumber !== '' && api.getStatus(this.trackingNumber)
         .then((response) => {
           this.trackingItem = response
-          console.log('response: ' + JSON.stringify(response, undefined, 2));
+          console.log('response: ' + JSON.stringify(response, undefined, 2))
         })
         .catch(handleError);
     },
     searchForTrackingNumber(){
-      this.$route.query.id = this.this.trackingItem.id
-      this.$router.reload();
+      this.$route.params.id = this.trackingNumber
+      this.$router.replace({ name: 'Home', params: { id: this.trackingNumber} })
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style lang="stylus">
   .tracking-number
-    &__logo
-      margin-top 1em
-      width 400px
-      text-align left
-      display inline-block
     &__header
       background #706c14
       padding .25em 1em
