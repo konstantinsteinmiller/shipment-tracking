@@ -16,11 +16,16 @@ export default ({ config, db }) => {
 	// perhaps expose some API metadata at the root
 	api.get('/tracking', (req, res) => {
 		console.log('req: ', req.query);
+		console.log('db: ', db);
         res.status(200).json({ id: req.query.id, states: [] });
 	}); 
 
 	// create a new tracking number
 	api.post('/tracking', (req, res) => {
+        const note = { text: req.body.body, title: req.body.title}
+        let shipment = db.collection('shipment').insertOne(note, (err, results) => {
+			console.log('err, results: ', err, results);
+        })
 		console.log('req.body: ', /*req,*/ req.body, req.body.type);
 		res.json({ data: req.body });
 	});
