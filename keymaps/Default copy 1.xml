@@ -10,6 +10,12 @@
     <keyboard-shortcut first-keystroke="ctrl dead_circumflex" />
   </action>
   <action id="DuplicatesForm.SendToLeft" />
+  <action id="EditorDecreaseFontSize">
+    <keyboard-shortcut first-keystroke="shift ctrl alt minus" />
+  </action>
+  <action id="EditorIncreaseFontSize">
+    <keyboard-shortcut first-keystroke="shift ctrl alt plus" />
+  </action>
   <action id="FileChooser.GotoHome" />
   <action id="GotoBookmark1" />
 </keymap>

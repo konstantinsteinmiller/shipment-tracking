@@ -1,5 +1,5 @@
 <templateSet group="JavaScript">
-  <template name="dump" value="console.log('$END$$Clipboard$', $Clipboard$)" toReformat="false" toShortenFQNames="true">
+  <template name="dump" value="console.log('$END$$Clipboard$', $Clipboard$)" description="" toReformat="false" toShortenFQNames="true">
     <variable name="Clipboard" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
