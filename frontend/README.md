@@ -1,4 +1,4 @@
-# package-transport-frontend
+# shipment-tracking-frontend
 
 > Enables shipment tracking via a tracking number. Shows the current status and the history of the whereabouts of the shipment. 
 

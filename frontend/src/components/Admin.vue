@@ -1,22 +1,74 @@
 <template>
-  <div>
-    <div>
-      <img src="../assets/logo.png" class="admin__logo">
-    </div>
+
     <div class="admin">
-      <h1>{{title}}</h1>
-      <div class="admin__panel">
-        <div class="admin__input">
-          <div class="admin__label">Shipment type</div>
-          <input id="admin" type="text" v-model="trackingNumber" placeholder="e.g. XXXXXXX12313XXXXX01">
-          <!--<div v-if="validateTrackingNumber" class="admin__validation-message">A tracking number can only contain alphanumerical numbers and letters</div>-->
-        </div>
-        <div class="admin__search-button">
-          <button type="text" @click.native="createTrackingId">Create Tracking Id<i class="fa fa-database admin__submit-button-icon"></i></button>
-        </div>
-      </div>
+      <v-layout row>
+        <v-flex sm12 sm12>
+          <v-card>
+            <v-alert v-if="alert" :type="alert.type" dismissible v-model="alert">
+              {{ alert.text }}
+            </v-alert>
+            <v-toolbar color="inspire" dark>
+              <v-flex ms12 sm12 column  class="text-lg-left">
+                  <v-toolbar-title>{{title}}</v-toolbar-title>
+                  <span class="text-lg-right">{{subTitle}}</span>
+              </v-flex>
+            </v-toolbar>
+            <v-list two-line>
+              <v-container grid-list-xl >
+                <v-form v-model="valid" ref="form" lazy-validation>
+                  <v-select label="Shipment type"
+                            item-value="text"
+                            v-model="editModel.shipmentType"
+                            :items="shipmentTypesOptions"
+                  />
+                  <v-layout row wrap>
+                      <v-flex xs12 sm6>
+                          <div>
+                            <v-subheader >Source adress</v-subheader>
+                            <v-text-field label="Name"
+                                          v-model="editModel.sourceAdress.name"/>
+                            <v-text-field label="Street"
+                                          v-model="editModel.sourceAdress.street"/>
+                            <v-text-field label="House number"
+                                          v-model="editModel.sourceAdress.houseNumber"/>
+                            <v-text-field label="Postal code"
+                                          v-model="editModel.sourceAdress.postCode"/>
+                            <v-text-field label="Town"
+                                          v-model="editModel.sourceAdress.town"/>
+                            <v-text-field label="country"
+                                          v-model="editModel.sourceAdress.country"/>
+                          </div>
+                      </v-flex>
+                      <v-flex xs12 sm6>
+                        <div>
+                          <v-subheader >Target adress</v-subheader>
+                          <v-text-field label="Name"
+                                        v-model="editModel.targetAdress.name"/>
+                          <v-text-field label="Street"
+                                        v-model="editModel.targetAdress.street"/>
+                          <v-text-field label="House number"
+                                        v-model="editModel.targetAdress.houseNumber"/>
+
+                          <v-text-field label="Postal code"
+                                        v-model="editModel.targetAdress.postCode"/>
+
+                          <v-text-field label="Town"
+                                        v-model="editModel.targetAdress.town"/>
+                          <v-text-field label="country"
+                                        v-model="editModel.targetAdress.country"/>
+                        </div>
+                      </v-flex>
+
+                      <v-btn block @click="createTrackingId" color="primary">submit</v-btn>
+                  </v-layout>
+                </v-form>
+              </v-container>
+
+            </v-list>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </div>
-  </div>
 </template>
 
 <script>
@@ -31,11 +83,37 @@ export default {
       title: 'Administration',
       subTitle: 'Create new tracking item and receive a tracking number',
       id: '',
+      trackingNumber: 'sadfsd',
+      valid: true,
+      alert: null,
+      editModel: {
+        sourceAdress: {
+          name: 'Oma Paschulke',
+          street: 'Hauptstraße',
+          houseNumber: '3',
+          postCode: '0234',
+          town: 'Hamburg',
+          country: 'Deutschland'
+        },
+        shipmentType: { text: 'parcel', value: 'parcel' },
+        targetAdress: {
+          name: 'Enkel Max',
+          street: 'Zielstraße',
+          houseNumber: '25',
+          postCode: '8983',
+          town: 'München',
+          country: 'Deutschland'
+        }
+      },
+      shipmentTypesOptions: [ { text: 'parcel', value: 'parcel' },
+                              { text: 'large letter', value: 'large letter' },
+                              { text: 'letter', value: 'letter' },
+                              { text: 'postcard', value: 'postcard' }]
     }
   },
   mounted() {
     document.title = 'Shipment tracking administration'
-    this.createTrackingId({ type: 'parcel', time: new Date(), startLocation: 'Hamburg', targetLocation: 'München' })
+    // this.createTrackingId({ type: 'parcel', time: new Date(), startLocation: 'Hamburg', targetLocation: 'München' })
   },
   computed: {
     validateTrackingNumber(){
@@ -45,61 +123,32 @@ export default {
   },
   created() {},
   methods: {
-    createTrackingId(data){
+    createTrackingId(){
+      let data = null;
+
+      data = {
+        shipmentType: this.editModel.shipmentType.value,
+        sourceAdress: this.editModel.sourceAdress,
+        targetAdress: this.editModel.targetAdress
+      }
+
       api.postTrackingId(data)
         .then((response) => {
           console.log('response: ', response);
+          this.alert = { type: 'success', text: `A tracking number was generated for the shipment: ${response.trackingNumber}` }
         })
-        .catch(handleError);
+        .catch((err) => {
+          console.log('err', err)
+          this.alert = { type: 'error', text: `A tracking number could not be generated. Please enter valid information` }
+        });
     }
   }
 }
 </script>
 
 <style lang="stylus">
-  .admin
-    &__panel
-      background #f8f8f8
-      height auto
-      margin 1em
-      padding 1em
-      border 1px solid #e0e0e0
-    &__input
-      width 100%
-      min-height 1em
-      padding 1em 0
-      margin .5em 0
-      font-size 16px
-      > *
-        float left
-        clear both
-      input
-        width calc(100% - 2.5em)
-        margin .5em
-        padding .5em
-        font-size 16px
-        &::placeholder
-          color lightgrey
-    &__submit-button
-      button
-        font-size 16px
-        min-width 10em
-        width 100%
-        padding .75em
-        background #706c14
-        border none
-        color white
-        font-weight bold
-        cursor pointer
-        outline-color #ff5050
-      &-icon
-        padding-left .5em
-    &__label
-      margin .5em
-    &__validation-message
-      color #ff5050
-      text-align left
-      padding .25em .5em
-      font-size 12px
+  /*.admin*/
+    /*&__header*/
+      /*text-align left*/
 
 </style>

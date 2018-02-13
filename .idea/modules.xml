@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/package-transport.iml" filepath="$PROJECT_DIR$/package-transport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shipment-tracking.iml" filepath="$PROJECT_DIR$/shipment-tracking.iml" />
     </modules>
   </component>
 </project>

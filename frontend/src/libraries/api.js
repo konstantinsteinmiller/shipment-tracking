@@ -33,9 +33,9 @@ export default class Api {
   postTrackingId(data){
     return this.api.post('tracking', data)
       .then(parseJSON)
-      .then((response) => {
-        return response;
-      })
+      // .then((response) => {
+      //   return response;
+      // })
       .catch(handleError)
   }
 
