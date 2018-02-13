@@ -49,7 +49,7 @@ export default class Api {
   }
 
   getStatus(trackingNumber){
-    return this.api.get('tracking?id=' + trackingNumber)
+    return this.api.get('tracking?trackingNumber=' + trackingNumber)
       .then(parseJSON)
       // .then(response => return response)
       .catch(handleError)

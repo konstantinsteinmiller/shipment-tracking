@@ -10,7 +10,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/tracking/:id',
+      path: '/tracking',
       name: 'Home',
       component: Home
     },

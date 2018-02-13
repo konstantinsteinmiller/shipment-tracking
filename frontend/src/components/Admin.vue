@@ -90,7 +90,7 @@ export default {
         sourceAdress: {
           name: 'Oma Paschulke',
           street: 'Hauptstraße',
-          houseNumber: '3',
+          houseNumber: '1',
           postCode: '0234',
           town: 'Hamburg',
           country: 'Deutschland'
@@ -99,7 +99,7 @@ export default {
         targetAdress: {
           name: 'Enkel Max',
           street: 'Zielstraße',
-          houseNumber: '25',
+          houseNumber: '5',
           postCode: '8983',
           town: 'München',
           country: 'Deutschland'
@@ -108,7 +108,9 @@ export default {
       shipmentTypesOptions: [ { text: 'parcel', value: 'parcel' },
                               { text: 'large letter', value: 'large letter' },
                               { text: 'letter', value: 'letter' },
-                              { text: 'postcard', value: 'postcard' }]
+                              { text: 'postcard', value: 'postcard' }
+                              /* other shipping methods */
+                            ]
     }
   },
   mounted() {

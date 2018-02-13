@@ -18,15 +18,17 @@ export default ({ config, db }) => {
 	// perhaps expose some API metadata at the root
 	api.get('/tracking', (req, res) => {
 		console.log('req.query: ', req.query);
-        const details = { /*'_id': req.query.id, */'trackingNumber': req.query.id };
+        const details = { 'trackingNumber': req.query.trackingNumber };
         db.collection('shipment').findOne(details, (err, item) => {
             if (err) {
-                res.send({'error':'An error has occurred'});
+                console.log('err', err)
+                res.json({ error: `An error has occurred while searching for ${req.query.trackingNumber} ${err}`});
             } else {
-                res.send(item);
+                /* if item exists, send back the item with its states, otherwise send error message */
+                let json = (item) ? item : { error: `Could not find tracking information for ${req.query.trackingNumber}` }
+                res.status(200).json(json);
             }
         });
-        res.status(200).json({ id: req.query.id, states: [] });
 	}); 
 
 	// create a new tracking number
@@ -47,7 +49,7 @@ export default ({ config, db }) => {
         // console.log("db.collection('shipment')", db.collection('shipment'))
         db.collection('shipment').insertOne(shipmentObj, (err, result) => {
             if (err) {
-                res.send({ error: 'An error has occurred' });
+                res.send({ error: `An error has occurred while inserting: ${err}`  });
             } else {
             	console.log('result.ops', result && result.ops)
                 result && result.ops && result.ops.length

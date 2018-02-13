@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <!--<v-app>-->
-    <!--<div class="page">-->
-
-      <!--<router-view/>-->
-    <!--</div>-->
-    <!--</v-app>-->
     <v-app id="inspire" dark>
       <v-navigation-drawer
         clipped
@@ -19,7 +13,7 @@
               <v-icon>dashboard</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title><router-link class="app__navigation-link" :to="{ name: 'Home', params: {id: 'null'} }">Tracking</router-link></v-list-tile-title>
+              <v-list-tile-title><router-link class="app__navigation-link" :to="{ name: 'Home' }">Tracking</router-link></v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile @click="">
@@ -57,7 +51,7 @@
         </v-container>
       </v-content>
       <v-footer app fixed>
-        <span>Shipment tracking &copy; 2018</span>
+        <span>ShipTrack &copy; 2018</span>
       </v-footer>
     </v-app>
   </div>
