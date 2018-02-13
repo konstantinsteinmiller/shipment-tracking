@@ -1,43 +1,117 @@
 <template>
   <div>
 
-    <div class="tracking-number">
-      <div class="tracking-number__header">
-        <h1>{{title}}</h1>
-        <h4>{{subTitle}}</h4>
-      </div>
-      <div class="tracking-number__panel">
-        <div class="tracking-number__input">
-          <div class="tracking-number__label">
-            Enter tracking number of your shipment
-          </div>
-          <input id="tracking-number" type="text"
-                 v-model="trackingNumber"
-                 placeholder="XXXXXXX12313XXXXX01"
-                 @keyup.enter="searchForTrackingNumber()">
-          <div v-if="validateTrackingNumber"
-               class="tracking-number__validation-message">A tracking number can only contain alphanumerical numbers and letters. Its always {{ trackingNumberMaxLength }} characters long
-          </div>
-        </div>
-        <div class="tracking-number__search-button">
-          <button type="text"
-                  @click="searchForTrackingNumber()"
-                  >Find shipment
-                  <i class="fa fa-search tracking-number__search-button-icon"></i>
-          </button>
-        </div>
-      </div>
-      <div class="tracking-number__history">
-        <h3>Status for tracking number {{trackingNumber}}</h3>
-        <div v-for="(state, index) in trackingItem.states"
-             :key="'item_' + state"
-             :class="{'tracking-number__history-item--active': trackingItem.states && trackingItem.states[index] && trackingItem.states[index].done}"
-             class="tracking-number__history-item">
+    <v-layout row>
+      <v-flex sm12 sm12>
+        <v-card>
+          <v-alert v-if="alert" :type="alert.type" dismissible v-model="alert">
+            {{ alert.text }}
+          </v-alert>
+          <v-toolbar color="inspire" dark>
+            <v-flex ms12 sm12 column  class="text-lg-left">
+              <v-toolbar-title>{{title}}</v-toolbar-title>
+              <span class="text-lg-right">{{subTitle}}</span>
+            </v-flex>
+          </v-toolbar>
+          <v-list two-line>
+            <v-container grid-list-xl >
+              <v-form v-model="valid" ref="form" lazy-validation>
+                <v-layout row wrap>
+                  <v-flex xs12>
+                    <div>
+                      <v-subheader >Source adress</v-subheader>
+                      <v-text-field label="Tracking Number"
+                                    v-model="trackingNumber"
+                                    placeholder="XX123456789YY"
+                                    @keyup.enter="(validateTrackingNumber || trackingNumber.length !== trackingNumberMaxLength) && searchForTrackingNumber()"/>
+                      <div v-if="validateTrackingNumber"
+                           class="tracking__validation-message">A tracking number can only contain alphanumerical numbers and letters. Its always {{ trackingNumberMaxLength }} characters long
+                      </div>
+                    </div>
+                  </v-flex>
 
-        </div>
-      </div>
+                  <v-btn :disabled="validateTrackingNumber || trackingNumber.length !== trackingNumberMaxLength"
+                         block @click="searchForTrackingNumber" color="primary">Find shipment&nbsp;<v-icon>search</v-icon></v-btn>
 
-    </div>
+                </v-layout>
+              </v-form>
+            </v-container>
+
+          </v-list>
+        </v-card>
+
+        <v-card class="tracking__history-panel" v-if="trackingItem && trackingItem.states && trackingItem.states.length">
+
+          <v-toolbar color="inspire" dark>
+            <v-flex ms12 sm12 column  class="text-lg-left">
+              <v-toolbar-title>Status</v-toolbar-title>
+            </v-flex>
+          </v-toolbar>
+          <v-list two-line>
+            <v-container grid-list-xl >
+              <v-form v-model="valid" ref="form" lazy-validation>
+                <v-layout row wrap>
+                  <v-flex xs12>
+                    <div>
+                      <v-subheader >Status for tracking number {{trackingNumber}}</v-subheader>
+                      <div class="tracking__history">
+                        <div v-for="(state, index) in trackingItem.states"
+                            :key="'item_' + index"
+                            :class="{'tracking__history-item--active': trackingItem.states && trackingItem.states[index] && trackingItem.states[index].done}"
+                            class="tracking__history-item">
+
+                        </div>
+                      </div>
+                    </div>
+                  </v-flex>
+
+                  <!--<v-btn block @click="createTrackingId" color="primary">submit</v-btn>-->
+
+                </v-layout>
+              </v-form>
+            </v-container>
+
+          </v-list>
+        </v-card>
+      </v-flex>
+    </v-layout>
+    <!--<div class="tracking-number">-->
+      <!--&lt;!&ndash;<div class="tracking__header">&ndash;&gt;-->
+        <!--&lt;!&ndash;<h1>{{title}}</h1>&ndash;&gt;-->
+        <!--&lt;!&ndash;<h4>{{subTitle}}</h4>&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--<div class="tracking__panel">-->
+        <!--<div class="tracking__input">-->
+          <!--<div class="tracking__label">-->
+            <!--Enter tracking number of your shipment-->
+          <!--</div>-->
+          <!--<input id="tracking-number" type="text"-->
+                 <!--v-model="trackingNumber"-->
+                 <!--placeholder="XX123456789YY"-->
+                 <!--@keyup.enter="searchForTrackingNumber()">-->
+          <!--<div v-if="validateTrackingNumber"-->
+               <!--class="tracking__validation-message">A tracking number can only contain alphanumerical numbers and letters. Its always {{ trackingNumberMaxLength }} characters long-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="tracking__search-button">-->
+          <!--<button type="text"-->
+                  <!--@click="searchForTrackingNumber()"-->
+                  <!--&gt;Find shipment-->
+                  <!--<i class="fa fa-search tracking__search-button-icon"></i>-->
+          <!--</button>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="tracking__history">-->
+        <!--<h3>Status for tracking number {{trackingNumber}}</h3>-->
+        <!--<div v-for="(state, index) in trackingItem.states"-->
+             <!--:key="'item_' + state"-->
+             <!--:class="{'tracking__history-item&#45;&#45;active': trackingItem.states && trackingItem.states[index] && trackingItem.states[index].done}"-->
+             <!--class="tracking__history-item">-->
+
+        <!--</div>-->
+      <!--</div>-->
+
+    <!--</div>-->
   </div>
 </template>
 
@@ -52,19 +126,21 @@ export default {
     return {
       title: 'Shipment tracking',
       subTitle: 'Track the status of your shipment',
-      trackingItem: { id: 'ASDASDS13123213', states: [] },
-      trackingNumberMaxLength: 16,
-      trackingNumber: 'ASDASDS13123213'
+      trackingItem: { trackingNumber: 'LA123456789DE', states: [] },
+      trackingNumberMaxLength: 13,
+      trackingNumber: 'LA123456789DE',
+      valid: true,
+      alert: null
     }
   },
   computed: {
     validateTrackingNumber(){
       const n = this.trackingNumber;
-      console.log('n.length: ', n && typeof n === 'string' && n.length > 0 && (n.length < 16),  /[^\dA-Za-z]{1,}/.test(n));
-      return n && typeof n === 'string' && n.length > 0 && (/[^\dA-Za-z]{1,}/.test(n) || (n.length >= this.trackingNumberMaxLength))
+      console.log('n.length: ', n && typeof n === 'string' && n.length > 0 && (n.length < this.trackingNumberMaxLength),  n.length,  /[^\dA-Za-z]{1,}/.test(n));
+      return n && typeof n === 'string' && n.length > 0 && (/[^\dA-Za-z]{1,}/.test(n) || (n.length > this.trackingNumberMaxLength))
     },
     id(){
-      return (this.$route && this.$route.params && this.$route.params.id) ? this.$route.params.id : '';
+      return (this.$route && this.$route.query && this.$route.query.id) ? this.$route.query.id : '';
     }
   },
   created() {},
@@ -79,13 +155,19 @@ export default {
       this.trackingNumber && this.trackingNumber !== '' && api.getStatus(this.trackingNumber)
         .then((response) => {
           this.trackingItem = response
+          if(response && response.error) {
+            this.alert = { type: 'error', text: `An error occured: ${response.error}` }
+          }else{
+            this.alert = { type: 'success', text: `Successfully fetched tracking information for ${response.trackingNumber}` }
+          }
           console.log('response: ' + JSON.stringify(response, undefined, 2))
         })
         .catch(handleError);
     },
     searchForTrackingNumber(){
-      this.$route.params.id = this.trackingNumber
-      this.$router.replace({ name: 'Home', params: { id: this.trackingNumber} })
+      const id = this.trackingNumber.toUpperCase();
+      this.$route.params.id = id
+      this.$router.replace({ name: 'Home', query: { id: id} })
     }
   }
 }
@@ -93,12 +175,14 @@ export default {
 
 
 <style lang="stylus">
-  .tracking-number
+  .tracking
     &__header
       background #706c14
       padding .25em 1em
       text-align left
       color white
+    &__history-panel
+      margin-top 2em
     &__panel
       margin 2em auto
       background #f8f8f8
