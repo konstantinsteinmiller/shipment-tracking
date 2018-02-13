@@ -6,10 +6,10 @@ export default callback => {
 
     MongoClient.connect(db.uri, function(err, client) {
         err && console.warn('err: ', err);
-        const table = client.db("shipmenttracking");
+        const database = client.db("shiptrack");
 		// perform actions on the collection object
         console.log('-- db connection established --');
-        callback(table);
+        callback(database);
         // client.close();
     });
 }
