@@ -1,22 +1,38 @@
 <template>
-  <div>
-    <div>
-      <img src="../assets/logo.png" class="tracking-number__logo">
-    </div>
-    <div class="tracking-number">
-      <h1>{{title}}</h1>
-      <div class="tracking-number__panel">
-        <div class="tracking-number__input">
-          <div class="tracking-number__label">Enter tracking number of your shipment</div>
-          <input id="tracking-number" type="text" v-model="trackingNumber" placeholder="e.g. XXXXXXX12313XXXXX01">
-          <div v-if="validateTrackingNumber" class="tracking-number__validation-message">A tracking number can only contain alphanumerical numbers and letters</div>
-        </div>
-        <div class="tracking-number__search-button">
-          <button type="text" @click.native="searchForTrackingNumber">Find shipment<i class="fa fa-search tracking-number__search-button-icon"></i></button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-container fluid="fluid" class="text-xs-center">
+    <v-layout row wrap>
+      <v-flex xs12 sm6><span>Raised Light Theme</span>
+        <v-card height="185px" flat color="white">
+          <v-card-text>
+            <div>
+              <v-btn color="primary">Primary</v-btn>
+            </div>
+            <div>
+              <v-btn color="error">Error</v-btn>
+            </div>
+            <div>
+              <v-btn light disabled>Disabled</v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+      <v-flex xs12 sm6><span>Raised Dark Theme</span>
+        <v-card height="185px" flat color="secondary">
+          <v-card-text>
+            <div>
+              <v-btn color="primary" dark>Primary</v-btn>
+            </div>
+            <div>
+              <v-btn color="error" dark>Error</v-btn>
+            </div>
+            <div>
+              <v-btn color="primary" dark disabled>Disabled</v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
