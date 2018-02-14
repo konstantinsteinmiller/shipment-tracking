@@ -85,7 +85,7 @@ let assessStates = function(){
     ]
 }
 export const isValidTrackingNumber = function (trackingNumber) {
-    /* random serial digit derived from timestamp of max length 8 digits */
+    /* get the 9 digits and validate the checksum */
     let serialDigits = trackingNumber.substring(2,11);
     const s = serialDigits;
 
@@ -94,7 +94,7 @@ export const isValidTrackingNumber = function (trackingNumber) {
     let checkSumDigit = 11 - (checkSum % 11);
     if (checkSumDigit == 10) checkSumDigit = 0;
     if (checkSumDigit == 11) checkSumDigit = 5;
-    console.log('checkSumDigit === s[8]', serialDigits, checkSumDigit, s[8], checkSumDigit == s[8])
+
     return checkSumDigit == s[8];
 }
 
