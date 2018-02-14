@@ -1,1 +1,1 @@
-web: node dist/index.js
+web: ls && node ./dist
