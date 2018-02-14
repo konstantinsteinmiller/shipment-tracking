@@ -22,14 +22,12 @@
                       <v-text-field label="Tracking Number"
                                     v-model="trackingNumber"
                                     placeholder="XX123456789YY"
-                                    @keyup.enter="(validateTrackingNumber || trackingNumber.length !== trackingNumberMaxLength) && searchForTrackingNumber()"/>
-                      <div v-if="validateTrackingNumber"
-                           class="tracking__validation-message">A tracking number can only contain alphanumerical numbers and letters. Its always {{ trackingNumberMaxLength }} characters long
-                      </div>
+                                    :rules="[rules.required, rules.trackingNumber]"
+                                    @keyup.enter="(rules.trackingNumber && trackingNumber.length === trackingNumberMaxLength) && searchForTrackingNumber()"/>
                     </div>
                   </v-flex>
 
-                  <v-btn :disabled="validateTrackingNumber || trackingNumber.length !== trackingNumberMaxLength"
+                  <v-btn :disabled="typeof rules.trackingNumber === 'string' || trackingNumber.length !== trackingNumberMaxLength"
                          block @click="searchForTrackingNumber" color="primary">Find shipment&nbsp;<v-icon>search</v-icon></v-btn>
 
                 </v-layout>
@@ -52,7 +50,7 @@
               <v-form v-model="valid" ref="form" lazy-validation>
                 <v-layout row wrap>
                   <v-flex xs12 v-if="lastRecentShipmentState">
-                    <v-card style="border-radius: 0; ">
+                    <v-card style="border-radius: 0; background-color: #626262">
 
                       <v-container
                         fluid
@@ -81,7 +79,8 @@
                       </v-container>
                     </v-card>
                   </v-flex>
-                  <v-flex xs12 sm4 md2 v-for="(state, index) in trackingItem.states"
+                  <v-flex xs12 sm4 md2 :offset-md1="index === 0"
+                          v-for="(state, index) in trackingItem.states"
                           :key="'item_' + index"
                           class="tracking__history-item">
                     <div>
@@ -92,7 +91,7 @@
                              class="grey lighten-3"
                         >
                           <v-toolbar color="inspire"><span>{{ state.name }}</span></v-toolbar>
-                          <v-card style="border-radius: 0;" :class="{'tracking__history-item--active': state.scanned}">
+                          <v-card style="border-radius: 0; ; background-color: #626262" :class="{'tracking__history-item--active': state.scanned}">
 
                             <v-container
                               fluid
@@ -129,19 +128,22 @@
                       </div>
                     </div>
                   </v-flex>
+                  <v-flex xs12 >
+                    <div>
+                      <v-subheader>Shipment history details</v-subheader>
+                      <v-data-table :headers="tableHeaders"
+                                    :items="tableItems"
+                                    hide-actions
+                                    class="elevation-1 tracking__history-table" style="background-color: #626262!important" >
+                        <template slot="items" slot-scope="props">
+                          <td class="text-xs-left">{{ props.item.date }}</td>
+                          <td class="text-xs-left">{{ props.item.time }}</td>
+                          <td class="text-xs-left">{{ props.item.notice }}</td>
+                        </template>
+                      </v-data-table>
+                    </div>
+                  </v-flex>
 
-                  <div><v-subheader>Shipment history details</v-subheader>
-                  <v-data-table :headers="tableHeaders"
-                                :items="tableItems"
-                                hide-actions
-                                class="elevation-1" >
-                  <template slot="items" slot-scope="props">
-                    <td>{{ props.item.date }}</td>
-                    <td class="text-xs-center">{{ props.item.time }}</td>
-                    <td class="text-xs-left">{{ props.item.notice }}</td>
-                  </template>
-                  </v-data-table>
-                  </div>
 
                 </v-layout>
               </v-form>
@@ -166,9 +168,9 @@ export default {
       title: 'Shipment tracking',
       subTitle: 'Track the status of your shipment',
       tableHeaders: [
-        { text: 'Date', value: 'date', sortable: false },
-        { text: 'Time', value: 'time', sortable: false },
-        { text: 'State', value: 'notice', sortable: false },
+        { text: 'Date', value: 'date', sortable: false, align: 'left' },
+        { text: 'Time', value: 'time', sortable: false, align: 'left' },
+        { text: 'State', value: 'notice', sortable: false, align: 'left' },
       ],
       tableItems: [],
       trackingItem: { trackingNumber: 'LA123456789DE', states: [] },
@@ -176,7 +178,15 @@ export default {
       trackingNumberMaxLength: 13,
       trackingNumber: 'LA123456789DE',
       valid: true,
-      alert: null
+      alert: null,
+      rules: {
+        required: (value) => !!value || 'Required.',
+        trackingNumber: (value) => {
+          const n = value;
+          const condition = n && typeof n === 'string' && n.length > 0 && (/[A-Za-z]{2}[\d]{9}[A-Za-z]{2}/.test(n) && (n.length === this.trackingNumberMaxLength))
+          return !!condition || `A tracking number starts with 2 letters, is then followed by 9 alphanumerical numbers and ends with 2 additional letters. Its always ${ this.trackingNumberMaxLength } characters long`
+        }
+      }
     }
   },
   computed: {
@@ -184,7 +194,6 @@ export default {
      * and not contains any other character then a-z, A-Z and 0-9 */
     validateTrackingNumber(){
       const n = this.trackingNumber;
-      // console.log('n.length: ', n && typeof n === 'string' && n.length > 0 && (n.length < this.trackingNumberMaxLength),  n.length,  /[^\dA-Za-z]{1,}/.test(n));
       return n && typeof n === 'string' && n.length > 0 && (/[^\dA-Za-z]{1,}/.test(n) || (n.length > this.trackingNumberMaxLength))
     },
     id(){
@@ -194,7 +203,7 @@ export default {
   beforeRouteUpdate(to, from, next){
     // console.log('to.query', to.query)
     if(to.query && to.query.id) { this.trackingNumber = to.query.id; } //initialize from URL params if page is updated
-    this.onInit(); //recall the onInit method to trigger fetching status for tracking number
+    this.onInit(); //re-call the onInit method to trigger fetching status for tracking number
   },
   created() {},
   mounted() {
@@ -204,34 +213,44 @@ export default {
   },
   methods: {
     onInit(){
+      /* if a tracking number is set, fetch the status for this shioment tracking item */
       this.trackingNumber && this.trackingNumber !== '' && api.getStatus(this.trackingNumber)
         .then((response) => {
+          if(response && response.error) {
+            /* if error occured, clean up the data so that no false data is shown in tracking history */
+            this.alert = { type: 'error', text: `An error occured: ${response.error}` }
+            this.trackingItem = null
+            this.tableItems= []
+            return
+          }else{
+            this.alert = { type: 'success', text: `Successfully fetched tracking information for ${response.trackingNumber}` }
+          }
+
           this.trackingItem = response
 
           /* set the last scanned state, so that we know which one to display as current */
           let scannedStates = response.states.filter( state => state.scanned === true )
-          this.tableItems = scannedStates.map((state) => {
-            return {
-                      date: new Date(state.time).toLocaleDateString("de-DE"),
-                      time: new Date(state.time).toLocaleTimeString("de-DE"),
-                      notice: state.notice
-                   }
-          })
+          this.tableItems = scannedStates
+                            .map((state) => {
+                              return {
+                                        date: new Date(state.time).toLocaleDateString("de-DE"),
+                                        time: new Date(state.time).toLocaleTimeString("de-DE"),
+                                        notice: state.notice
+                                     }
+                            })
+                            .reverse()/* reverse so that latest state is showed at top of history table */
 
-          /* pick out the last in the array */
+          /* pick out the last in the array to know which one to display at the top for current details */
           this.lastRecentShipmentState = (scannedStates && scannedStates.length) ? scannedStates.pop() : null
 
-          if(response && response.error) {
-            this.alert = { type: 'error', text: `An error occured: ${response.error}` }
-          }else{
-            this.alert = { type: 'success', text: `Successfully fetched tracking information for ${response.trackingNumber}` }
-          }
-          console.log('response: ' + JSON.stringify(response, undefined, 2))
         })
         .catch(handleError);
     },
     searchForTrackingNumber(){
+      /* convert to tracking number to uppercase letters for user convinience, so he can type lower and uppercase */
       const id = this.trackingNumber.toUpperCase();
+      /* update the route which will trigger an page update and then the onInit method
+       * which will fetch status by tracking number */
       this.$router.replace({ name: 'Tracking', query: Object.assign({}, this.$route.query, { id: id }) })
     }
   }
@@ -244,7 +263,11 @@ export default {
     &__history-panel
       margin-top 2em
     &__history-item--active
-        /*background #b3d4fc*/
-        background-color: #63ddfc!important
+        background-color: #4CAF50!important
+        border-color: transparent !important;
+      margin-top 2em
+    &__history-table table.datatable
+        background-color: #626262
+        border-color: transparent !important;
 
 </style>

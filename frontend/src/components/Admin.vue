@@ -17,7 +17,7 @@
               <v-container grid-list-xl >
                 <v-form v-model="valid" ref="form" lazy-validation>
                   <v-select label="Shipment type"
-                            item-value="text"
+                            item-value="value"
                             v-model="editModel.shipmentType"
                             :items="shipmentTypesOptions"
                   />
@@ -82,8 +82,6 @@ export default {
     return {
       title: 'Administration',
       subTitle: 'Create new tracking item and receive a tracking number',
-      id: '',
-      trackingNumber: 'sadfsd',
       valid: true,
       alert: null,
       editModel: {
@@ -95,7 +93,7 @@ export default {
           town: 'Hamburg',
           country: 'Deutschland'
         },
-        shipmentType: { text: 'parcel', value: 'parcel' },
+        shipmentType: 'parcel',
         targetAdress: {
           name: 'Enkel Max',
           street: 'Zielstraße',
@@ -114,8 +112,8 @@ export default {
     }
   },
   mounted() {
+    /* no validation was build in for the administration ui because I got lazy at the end... */
     document.title = 'Shipment tracking administration'
-    // this.createTrackingId({ type: 'parcel', time: new Date(), startLocation: 'Hamburg', targetLocation: 'München' })
   },
   created() {},
   methods: {
@@ -123,14 +121,14 @@ export default {
       let data = null;
 
       data = {
-        shipmentType: this.editModel.shipmentType.value,
+        shipmentType: this.editModel.shipmentType,
         sourceAdress: this.editModel.sourceAdress,
         targetAdress: this.editModel.targetAdress
       }
 
       api.postTrackingNumber(data)
         .then((response) => {
-          console.log('response: ', response);
+          // console.log('response: ', response);
           this.alert = { type: 'success', text: `A tracking number was generated for the shipment: ${response.trackingNumber}` }
         })
         .catch((err) => {
@@ -143,8 +141,5 @@ export default {
 </script>
 
 <style lang="stylus">
-  /*.admin*/
-    /*&__header*/
-      /*text-align left*/
 
 </style>

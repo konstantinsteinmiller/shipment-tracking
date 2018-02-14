@@ -25,12 +25,7 @@
                                           required/>
                           </div>
                           <div>
-                            <!--<v-text-field label="State"-->
-                                          <!--v-model="editModel.state"-->
-                                          <!--:rules="[rules.state]"-->
-                                          <!--required/>-->
                             <v-select label="State"
-                                      item-value="text"
                                       v-model="editModel.state"
                                       :items="stateOptions"
                             />
@@ -63,7 +58,7 @@ import appConfig from '../../config/appConfig'
 const api = new Api(appConfig.apiEndpoint)
 
 export default {
-  name: 'admin',
+  name: 'updatestatus',
   data() {
     return {
       title: 'Update shipment status',
@@ -73,7 +68,7 @@ export default {
       trackingNumberMaxLength: 13,
       editModel: {
         trackingNumber: '',
-        state: { text: 'Arrived at Niederlassung Hamburg', value: 1 },
+        state:  1,
         notice: ''
       },
       stateOptions: [ { text: 'Arrived at Niederlassung Hamburg', value: 1 },
@@ -95,14 +90,9 @@ export default {
     }
   },
   mounted() {
-    document.title = 'Shipment tracking administration'
-    // this.createTrackingId({ type: 'parcel', time: new Date(), startLocation: 'Hamburg', targetLocation: 'München' })
+    document.title = 'ShipTrack Update Status'
   },
   computed: {
-    validateTrackingNumber(){
-      const n = this.editModel.trackingNumber;
-      return n && typeof n === 'string' && n.length > 0 && (/[^\dA-Za-z]{1,}/.test(n) || (n.length > this.trackingNumberMaxLength))
-    },
     formIsInvalid(){
       return typeof this.rules.trackingNumber(this.editModel.trackingNumber) === 'string'
              || typeof this.rules.notice(this.editModel.notice) === 'string'
@@ -116,7 +106,7 @@ export default {
       data = {
         trackingNumber: this.editModel.trackingNumber,
         notice: this.editModel.notice,
-        state: this.editModel.state.value
+        state: this.editModel.state
       }
 
       api.putTrackingNumber(data)
@@ -134,8 +124,5 @@ export default {
 </script>
 
 <style lang="stylus">
-  /*.admin*/
-    /*&__header*/
-      /*text-align left*/
 
 </style>
