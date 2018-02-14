@@ -30,7 +30,7 @@ export default class Api {
   }
 
 
-  postTrackingId(data){
+  postTrackingNumber(data){
     return this.api.post('tracking', data)
       .then(parseJSON)
       // .then((response) => {
@@ -39,7 +39,7 @@ export default class Api {
       .catch(handleError)
   }
 
-  putTrackingId(data){
+  putTrackingNumber(data){
     return this.api.put('tracking', data)
       .then(parseJSON)
       // .then((response) => {

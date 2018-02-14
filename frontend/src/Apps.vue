@@ -13,7 +13,7 @@
               <v-icon>dashboard</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title><router-link class="app__navigation-link" :to="{ name: 'Home' }">Tracking</router-link></v-list-tile-title>
+              <v-list-tile-title><router-link class="app__navigation-link" :to="{ name: 'Tracking' }">Tracking</router-link></v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile @click="">
@@ -22,6 +22,14 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title><router-link class="app__navigation-link" :to="{ name: 'Admin' }">Administration</router-link></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile @click="">
+            <v-list-tile-action>
+              <v-icon>today</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title><router-link class="app__navigation-link" :to="{ name: 'UpdateStatus' }">Update Shipment Status</router-link></v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -33,7 +41,7 @@
         <v-toolbar-items class="hidden-sm-and-down">
           <!--<v-btn flat>-->
             <div class="page__logo">
-              <img src="./assets/logo.png" class="page__logo-image">
+              <img src="/static/logo.png" class="page__logo-image">
             </div>
           <!--</v-btn>-->
         </v-toolbar-items>

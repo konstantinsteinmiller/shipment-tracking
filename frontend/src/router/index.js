@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import ShippingStatus from '@/components/ShippingStatus'
+import Tracking from '@/components/Tracking'
+import UpdateStatus from '@/components/UpdateStatus'
 import Admin from '@/components/Admin'
 // import ShippingHistory from '@/components/ShippingHistory'
 
@@ -11,23 +11,18 @@ export default new Router({
   routes: [
     {
       path: '/tracking',
-      name: 'Home',
-      component: Home
+      name: 'Tracking',
+      component: Tracking
     },
     {
-      path: '/shipping-status',
-      name: 'ShippingStatus',
-      component: ShippingStatus
+      path: '/update-status',
+      name: 'UpdateStatus',
+      component: UpdateStatus
     },
     {
       path: '/admin',
       name: 'Admin',
       component: Admin
-    }/*,
-    {
-      path: '/history',
-      name: 'ShippingHistory',
-      component: ShippingHistory
-    }*/
+    }
   ]
 })

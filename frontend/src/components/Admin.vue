@@ -117,12 +117,6 @@ export default {
     document.title = 'Shipment tracking administration'
     // this.createTrackingId({ type: 'parcel', time: new Date(), startLocation: 'Hamburg', targetLocation: 'München' })
   },
-  computed: {
-    validateTrackingNumber(){
-      const n = 'this.id';
-      return n && typeof n === 'string' && n.length > 0 && /[^\dA-Za-z]{1,}/.test(n)
-    }
-  },
   created() {},
   methods: {
     createTrackingId(){
@@ -134,7 +128,7 @@ export default {
         targetAdress: this.editModel.targetAdress
       }
 
-      api.postTrackingId(data)
+      api.postTrackingNumber(data)
         .then((response) => {
           console.log('response: ', response);
           this.alert = { type: 'success', text: `A tracking number was generated for the shipment: ${response.trackingNumber}` }
