@@ -1,20 +1,15 @@
 # ShipTrack
 
-> Enables shipment tracking via a tracking number. Shows the current status and the history of the whereabouts of the shipment. 
+> Shipment tracking via a tracking number. Shows the current status and the history of the whereabouts of the shipment. 
+> You can send in new shipping request via the administration ui and update the status with the update status ui
+
+![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-search.PNG)
 
 ## Build Setup
-
 ``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:5050
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+to launch locally follow instructions in the /backend/readme.md and the /fronend/readme.md
 ```
 
+### Architecture
+
+>
