@@ -13,18 +13,18 @@ try out the hosted version on heroku
 
 ![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-admin.PNG)
 
-## Build Setup
+## 1 Build Setup
 ``` bash
 to launch locally follow instructions in the /backend/readme.md and the /fronend/readme.md
 ```
 
-### Workflow + Architecture
+### 2 Workflow + Architecture
 
 ![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack.jpg)
 
 >
 
-### Scenario
+### 3 Scenario
 
 >Ausgangslage: Oma Paschulke möchte ihrem Enkel Max von Hamburg nach München einen Band aus seiner Lieblingsbuchreihe schicken. Sie möchte das Buch mit Hermes versenden. Dafür bringt sie das verpackte Buch zum Paketshop um die Ecke. Dort gibt sie es ab und erhält eine mehrstellige Sendungsnummer.
  Mit Hilfe dieser Sendungsnummer möchte sie den Weg des Paketes bequem am eigenen Computer nachvollziehen - und hier bist Du gefragt!
@@ -38,7 +38,7 @@ to launch locally follow instructions in the /backend/readme.md and the /fronend
  Wie lassen sich die verschiedenen Status am effizientesten/sinnvollsten speichern?
  Über ein kleines Frontend können Oma Paschulke und Enkel Max jederzeit Auskunft darüber bekommen, wo sich das Paket befindet (mithilfe der Sendungsnummer). Die einzelnen Transportschritte können über das Frontend nachvollzogen werden.
 
-### Usage
+### 4 Usage
 > Navigation is possible by clicking the burger menu button at the top left corner.
 
 > Before you can use the tracking feature, you have to navigate to the administration ui 
