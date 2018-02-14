@@ -30,28 +30,21 @@ export default class Api {
   }
 
 
-  postTrackingId(data){
+  postTrackingNumber(data){
     return this.api.post('tracking', data)
       .then(parseJSON)
-      // .then((response) => {
-      //   return response;
-      // })
       .catch(handleError)
   }
 
-  putTrackingId(data){
+  putTrackingNumber(data){
     return this.api.put('tracking', data)
       .then(parseJSON)
-      // .then((response) => {
-      //   return response;
-      // })
       .catch(handleError)
   }
 
   getStatus(trackingNumber){
-    return this.api.get('tracking?id=' + trackingNumber)
+    return this.api.get('tracking?trackingNumber=' + trackingNumber)
       .then(parseJSON)
-      // .then(response => return response)
       .catch(handleError)
   }
 }
