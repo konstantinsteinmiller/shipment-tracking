@@ -4,65 +4,82 @@ let assessStates = function(){
     /* normally here we would generate states according to the optimal logistic way for the shipment to happen
     * but I will only mock this part, since I don't have the necessary data to execute such a calculation.
     * We only get the states for the predifined use case of Oma Paschulke to Enkel Max */
+    let date = new Date();
+    let date2 = new Date(JSON.parse(JSON.stringify(date))).setHours(date.getHours()+5);
+    let date3 = new Date(new Date(JSON.parse(JSON.stringify(date))).setDate(date.getDate()+1)).setHours(date.getHours()+4);
+    let date4 = new Date(new Date(JSON.parse(JSON.stringify(date)))).setDate(date.getDate()+2);
+    let date5 =new Date(new Date(JSON.parse(JSON.stringify(date))).setDate(date.getDate()+2)).setHours(date.getHours()+6);
     return [
         {
             /* Paketshop irgendwo Hamburg */
+            name: 'Paketshop Hamburg',
             location: {
                 street: 'Hauptstraße',
                 housenumber: '1',
-                postcome: '0234',
+                postcode: '0234',
                 city: 'Hamburg',
                 country: 'Germany'
             },
-            time: new Date(2018, 2, 12, 12, 3, 0, 0),
-            scanned: false
+            time: date,
+            image: 'small-office.svg',
+            notice: `Paket wurde um ${date.toLocaleTimeString()} an einen Fahrer übergeben
+                    und befindet sich auf dem Weg in die Niederlassung Hamburg`,
+            scanned: true
         },
         {
             /* Niederlassung Hamburg */
+            name: 'Niederlassung Hamburg',
             location: {
                 street: 'Hamburgerstraße',
                 housenumber: '2',
-                postcome: '0234',
+                postcode: '0234',
                 city: 'Hamburg',
                 country: 'Germany'
             },
-            time: new Date(2018, 2, 12, 14, 5, 0, 0),
+            time: date2,
+            image: 'office.svg',
             scanned: false
         },
         {
             /* Regionales Verteilzentrum Niedersachsen */
+            name: 'Regionales Verteilzentrum Niedersachsen',
             location: {
                 street: 'Niedersachsener Straße',
                 housenumber: '3',
-                postcome: '23331',
+                postcode: '23331',
                 city: 'Osnabrück',
                 country: 'Germany'
             },
-            time: new Date(2018, 2, 13, 8, 35, 0, 0),
+            time: date3,
+            image: 'logistic_center.svg',
             scanned: false
         },
         {
             /* Niederlassung München */
+            name: 'Niederlassung München',
             location: {
                 street: 'Oktoberfeststraße',
                 housenumber: '4',
-                postcome: '8898',
+                postcode: '8898',
                 city: 'München',
                 country: 'Germany'
             },
-            time: new Date(2018, 2, 14, 7, 10, 0, 0),
+            time: date4,
+            image: 'office.svg',
             scanned: false
         },
         {
             /* Zustellung Ziel */
+            name: 'Haus Enkel Max',
             location: {
                 street: 'Zielstraße',
                 housenumber: '5',
-                postcome: '8983',
+                postcode: '8983',
                 city: 'München',
                 country: 'Germany'
             },
-            time: new Date(2018, 2, 14, 10, 45, 0, 0),
+            time: date5,
+            image: 'haus.png',
             scanned: false
         }
     ]
