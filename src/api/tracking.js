@@ -84,6 +84,19 @@ let assessStates = function(){
         }
     ]
 }
+export const isValidTrackingNumber = function (trackingNumber) {
+    /* random serial digit derived from timestamp of max length 8 digits */
+    let serialDigits = trackingNumber.substring(2,11);
+    const s = serialDigits;
+
+    /* checksum calculation by https://en.wikipedia.org/wiki/S10_(UPU_standard) */
+    let checkSum = +s[0]*8 + s[1]*6 + s[2]*4 + s[3]*2 + s[4]*3 + s[5]*5 + s[6]*9 + s[7]*7;
+    let checkSumDigit = 11 - (checkSum % 11);
+    if (checkSumDigit == 10) checkSumDigit = 0;
+    if (checkSumDigit == 11) checkSumDigit = 5;
+    console.log('checkSumDigit === s[8]', serialDigits, checkSumDigit, s[8], checkSumDigit == s[8])
+    return checkSumDigit == s[8];
+}
 
 export default function (data) {
     /* generate unique tracking number
@@ -93,6 +106,8 @@ export default function (data) {
     switch(data.shipmentType){
         case 'parcel': serviceIndicatorCode = 'C' + letters[Math.floor(Math.random()*100) % 26];
         case 'letter': serviceIndicatorCode = 'L' + letters[Math.floor(Math.random()*100) % 26];
+        case 'large letter': serviceIndicatorCode = 'L' + letters[Math.floor(Math.random()*100) % 26];
+        case 'postcard': serviceIndicatorCode = 'L' + letters[Math.floor(Math.random()*100) % 26];
         /* ... etc. for all shipment types */
         default: serviceIndicatorCode = 'L' + letters[Math.floor(Math.random()*100) % 26];
     }
