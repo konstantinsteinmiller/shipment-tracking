@@ -23,4 +23,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="copy" value="JSON.parse(JSON.stringify($Clipboard$))" toReformat="false" toShortenFQNames="true">
+    <variable name="Clipboard" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
