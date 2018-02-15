@@ -16,7 +16,7 @@ export default class Api {
   constructor(){
     this.api = function() {
       return axios.create({
-        baseURL: (process.env.NODE_ENV === '"development"') ? appConfig.apiEndpointLocal : appConfig.apiEndpointRemote,
+        baseURL: (process.env.NODE_ENV === 'development') ? appConfig.apiEndpointLocal : appConfig.apiEndpointRemote,
         timeout: 5000
       })
     }();
