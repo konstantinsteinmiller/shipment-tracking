@@ -2,6 +2,7 @@
  * Created by Eternal on 06.02.2018.
  */
 import axios from 'axios'
+import appConfig from '../../config/appConfig'
 
 export let handleError = (err) => { console.warn('err: ', err); throw Error; }
 
@@ -10,21 +11,13 @@ let parseJSON = (json) => {
 }
 
 export default class Api {
-  endpoint = null
   api = null
 
-  constructor(endpoint){
-    this.endpoint = endpoint
+  constructor(){
     this.api = function() {
       return axios.create({
-        baseURL: endpoint,
-        // baseURL: 'https://lexiq-skill.herokuapp.com/api/',
-        timeout: 5000,
-        // headers: {
-          // 'X-ALEXA-ID': userId,
-          // 'X-ALEXA-LANGUAGE': selectedLanguage,
-          // 'X-UTTERANCE': utterance
-        // }
+        baseURL: (process.env.NODE_ENV === '"development"') ? appConfig.apiEndpointLocal : appConfig.apiEndpointRemote,
+        timeout: 5000
       })
     }();
   }

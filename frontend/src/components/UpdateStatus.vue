@@ -54,8 +54,7 @@
 
 <script>
 import Api, { handleError } from '../libraries/api'
-import appConfig from '../../config/appConfig'
-const api = new Api(appConfig.apiEndpoint)
+const api = new Api()
 
 export default {
   name: 'updatestatus',
