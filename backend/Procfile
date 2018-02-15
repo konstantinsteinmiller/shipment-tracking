@@ -1,1 +1,1 @@
-web: npm run build && ls && node ./dist
+web: ls && node ./dist
