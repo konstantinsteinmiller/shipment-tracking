@@ -20,8 +20,11 @@ export default ({ config, db }) => {
 		// console.log('req.query: ', req.query);
 
         /* opt out if the tracking number is not valid because of checksum */
-        if (!isValidTrackingNumber(req.query.trackingNumber)){
+        if (req.query.trackingNumber && !isValidTrackingNumber(req.query.trackingNumber)){
             res.status(200).json({ error: `The tracking number is invalid`});
+            return
+        }else if (!req.query.trackingNumber){
+            res.status(403).json({ error: `Pls provide a valid tracking number`});
             return
         }
 
