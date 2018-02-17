@@ -1,1 +1,1 @@
-web: ls && node ./dist
+web: ls && node ./backend/dist
