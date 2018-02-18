@@ -62,7 +62,7 @@
                             <!--<v-card color="transparent" class="black&#45;&#45;text">-->
                             <v-container fluid grid-list-lg >
                               <v-layout row>
-                                <v-flex xs12 class="text-xs-left" style="min-height: 28em">
+                                <v-flex xs12 class="text-xs-left" style="min-height: 28em; max-width: 30em;">
 
                                   <div>Receiver: {{ trackingItem.targetAdress.name }}</div>
                                   <div>Tracking number: {{ trackingItem.trackingNumber }}</div>

@@ -84,9 +84,10 @@ export default ({ config, db }) => {
                     /* if an item with this tracking number was found, it is found in item
                      * otherwise its null and we generate a new tracking number recursively
                      */
-                    item !== null && findTrackingNumber()
-                    console.log('item',
-                        item && JSON.stringify(item))
+                    if (item !== null){
+                        findTrackingNumber()
+                        return
+                    }
                     return db.collection('shipment').insertOne(shipmentObj)
                 })
                 .catch(err => console.log({ error: `An error has occurred while inserting: ${err}`  }))
