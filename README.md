@@ -30,7 +30,6 @@ to launch locally follow instructions in the /backend/readme.md and the /fronend
 ![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/vuetify.png)
 ![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/three.jpg)
 
->
 
 ### 3 Scenario
 

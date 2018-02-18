@@ -59,7 +59,6 @@
                       >
                         <v-layout row wrap>
                           <v-flex xs12 >
-                            <!--<v-card color="transparent" class="black&#45;&#45;text">-->
                             <v-container fluid grid-list-lg >
                               <v-layout row>
                                 <v-flex xs12 class="text-xs-left" style="min-height: 28em; max-width: 30em;">
@@ -76,7 +75,6 @@
                                 </v-flex>
                               </v-layout>
                             </v-container>
-                            <!--</v-card>-->
                           </v-flex>
                         </v-layout>
                       </v-container>
