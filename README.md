@@ -26,8 +26,9 @@ to launch locally follow instructions in the /backend/readme.md and the /fronend
 ![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack.jpg)
 
 ##### 2.1 Technologies
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/MEVN.PNG)
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/vuetify.PNG)
+![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/MEVN.png)
+![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/vuetify.png)
+![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/three.jpg)
 
 >
 
