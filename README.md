@@ -2,10 +2,13 @@
 
 > Shipment tracking via a tracking number. Shows the current status and the history of the whereabouts of the shipment. 
 > You can send in new shipping request via the administration ui and update the status with the update status ui
+> UI is just available in english. Internalization was left out.
 
 try out the hosted version here
 
 ![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-search.PNG)
+
+![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-tracking-globe.PNG)
 
 ![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-tracking.PNG)
 
@@ -21,6 +24,10 @@ to launch locally follow instructions in the /backend/readme.md and the /fronend
 ### 2 Workflow + Architecture
 
 ![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack.jpg)
+
+##### 2.1 Technologies
+![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/MEVN.PNG)
+![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/vuetify.PNG)
 
 >
 

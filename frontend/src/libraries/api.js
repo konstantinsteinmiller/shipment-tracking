@@ -4,11 +4,12 @@
 import axios from 'axios'
 import appConfig from '../../config/appConfig'
 
-export let handleError = (err) => { console.warn('err: ', err); throw Error; }
-
-let parseJSON = (json) => {
-  return (json && json.data) ? json.data : null;
+export let handleError = (err) => {
+  console.warn('err: ', err);
+  throw Error;
 }
+
+let parseJSON = (json) => { return (json && json.data) ? json.data : null; }
 
 export default class Api {
   api = null
@@ -43,52 +44,6 @@ export default class Api {
 }
 
 /*
-
-{
-  "_id"
-:
-  "5a84743b0ea83402b4ce3e4e", "shipmentType"
-:
-  "parcel", "sourceAdress"
-:
-  {
-    "name"
-  :
-    "Oma Paschulke", "street"
-  :
-    "Hauptstraße", "houseNumber"
-  :
-    "1", "postCode"
-  :
-    "0234", "town"
-  :
-    "Hamburg", "country"
-  :
-    "Deutschland"
-  }
-,
-  "targetAdress"
-:
-  {
-    "name"
-  :
-    "Enkel Max", "street"
-  :
-    "Zielstraße", "houseNumber"
-  :
-    "5", "postCode"
-  :
-    "8983", "town"
-  :
-    "München", "country"
-  :
-    "Deutschland"
-  }
-,
-  "trackingNumber"
-:
-  "LL299474375DE", "states"
-:
   [{
     "name": "Paketshop Hamburg",
     "location": {

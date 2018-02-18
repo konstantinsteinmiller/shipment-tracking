@@ -62,14 +62,17 @@
                             <!--<v-card color="transparent" class="black&#45;&#45;text">-->
                             <v-container fluid grid-list-lg >
                               <v-layout row>
-                                <v-flex xs12 class="text-xs-left" >
+                                <v-flex xs12 class="text-xs-left" style="min-height: 28em">
 
                                   <div>Receiver: {{ trackingItem.targetAdress.name }}</div>
                                   <div>Tracking number: {{ trackingItem.trackingNumber }}</div>
                                   <div>Shipment registration: {{ new Date(trackingItem.states[0].time).toLocaleString() }}</div>
                                   <div>Last update: {{ new Date(lastRecentShipmentState.time).toLocaleString() }}</div>
                                   <div>Last shipment state: {{ lastRecentShipmentState.notice }}</div>
-
+                                  <div>&nbsp;</div>
+                                  <div style="font-size: 12px">Notice: The globe mark the locations, where the shipment will</div>
+                                  <div style="font-size: 12px">be at given times.</div>
+                                  <globe :states="trackingItem.states"></globe>
                                 </v-flex>
                               </v-layout>
                             </v-container>
@@ -157,11 +160,13 @@
 </template>
 
 <script>
+import Globe from './Globe.vue'
 import Api, { handleError } from '../libraries/api'
 const api = new Api()
 
 export default {
   name: 'tracking',
+  components: { Globe },
   data() {
     return {
       title: 'Shipment tracking',
@@ -187,11 +192,55 @@ export default {
           const condition = n && typeof n === 'string' && n.length > 0 && (/[A-Za-z]{2}[\d]{9}[A-Za-z]{2}/.test(n) && (n.length === this.trackingNumberMaxLength))
           return !!condition || `A tracking number starts with 2 letters, is then followed by 9 alphanumerical numbers and ends with 2 additional letters. Its always ${ this.trackingNumberMaxLength } characters long`
         }
+      },
+      filteredData() {
+        // const x = this.selectedFilter,
+        //   filter = new RegExp(this.filteredText, 'i')
+        return []/*this.speakerData.filter(el => {
+          if (el[x] !== undefined) { return el[x].match(filter) }
+          else return true;
+        })*/
       }
     }
   },
   computed: {
-    id(){ return (this.$route && this.$route.query && this.$route.query.id) ? this.$route.query.id : ''; }
+    id(){
+      return (this.$route && this.$route.query && this.$route.query.id) ? this.$route.query.id : '';
+    },
+    teamsArr() {
+      //create it as an object first because that's more efficient than an array
+      var endUnit = {};
+      this.filteredData.forEach(function(index) {
+        //we'll need to get the year from the end of the string
+        let lat = index.latitude,
+          long = index.longitude,
+          key = lat + ", " + long,
+          magBase = 0.1,
+          val = 'Microsoft CDAs';
+        if (lat === undefined || long === undefined) return;
+        if (val in endUnit) {
+          //if we already have this location (stored together as key) let's increment it
+          if (key in endUnit[val]) {
+            endUnit[val][key][2] += magBase;
+          } else {
+            endUnit[val][key] = [lat, long, magBase];
+          }
+        } else {
+          let y = {};
+          y[key] = [lat, long, magBase];
+          endUnit[val] = y;
+        }
+      });
+      let x = Object.entries(endUnit);
+      let area = [],
+        places,
+        all;
+      for (let i = 0; i < x.length; i++) {
+        [all, places] = x[i];
+        area.push([all, [].concat(...Object.values(places))]);
+      }
+      return area;
+    }
   },
   beforeRouteUpdate(to, from, next){
     if(to.query && to.query.id) { this.trackingNumber = to.query.id; } //initialize from URL params if page is updated
