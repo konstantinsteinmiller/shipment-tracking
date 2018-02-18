@@ -37,8 +37,11 @@ exports.default = function (_ref) {
         // console.log('req.query: ', req.query);
 
         /* opt out if the tracking number is not valid because of checksum */
-        if (!(0, _tracking.isValidTrackingNumber)(req.query.trackingNumber)) {
+        if (req.query.trackingNumber && !(0, _tracking.isValidTrackingNumber)(req.query.trackingNumber)) {
             res.status(200).json({ error: 'The tracking number is invalid' });
+            return;
+        } else if (!req.query.trackingNumber) {
+            res.status(403).json({ error: 'Pls provide a valid tracking number' });
             return;
         }
 
@@ -63,32 +66,49 @@ exports.default = function (_ref) {
         }
 
         var data = req.body;
-        /* in order to garantue a really unique tracking number in the database, we search for
+
+        /* Obviously 8 Digits doesn't span up a big enough range to create tracking numbers forever.
+         * Since I have no major knowledge of encoding and researching it was quite tedious,
+         * I went with the appoach to use a standard called S10 UPU
+         * like described on https://en.wikipedia.org/wiki/S10_(UPU_standard)
+         * I also added a safety mechanic that would look for collisions in the database
+         * and would regenerate a new tracking number.
+         *
+         * A considerable improvement of security would be to add 3-4 characters to the
+         * tracking number and then store these additional bits in the database.
+         * This would add a certain degree of security to the tracking number lookup.
+         *
+         * In order to garantue a really unique tracking number in the database, we search for
          * the generated tracking number within the db and generate a new tracking number
          * until there is no collision anymore. This approach assumes that the
-         * database is cleared or archived after a fixed period of time to continually allow
+         * database is cleared or archived after a fixed period of time to continually allow to
          * produce really unique tracking numbers and not run out of available slots.
+         * tl;dr;
          */
         var shipmentObj = void 0,
             details = void 0;
         var findTrackingNumber = function findTrackingNumber() {
-            shipmentObj = (0, _tracking2.default)(data);
-            details = { trackingNumber: shipmentObj.trackingNumber };
-            db.collection('shipment').findOne(details).then(function (item) {
+            (0, _tracking2.default)(data).then(function (result) {
+                shipmentObj = result;
+                console.log('shipmentObj', shipmentObj);
+
+                details = { trackingNumber: shipmentObj.trackingNumber };
+                return db.collection('shipment').findOne(details);
+            }).then(function (item) {
                 /* if an item with this tracking number was found, it is found in item
                  * otherwise its null and we generate a new tracking number recursively
                  */
                 item !== null && findTrackingNumber();
-
+                console.log('item', item && JSON.stringify(item));
                 return db.collection('shipment').insertOne(shipmentObj);
             }).catch(function (err) {
                 return console.log({ error: 'An error has occurred while inserting: ' + err });
             }).then(function (result) {
                 /* resolve of db.collection('shipment').insertOne(shipmentObj) */
-                console.log('result.ops', result && result.ops);
+                // console.log('result.ops', result && result.ops)
                 result && result.ops && result.ops.length && res.json({ data: result.ops[0], trackingNumber: shipmentObj.trackingNumber });
             }).catch(function (err) {
-                return res.send({ error: 'An error has occurred while inserting: ' + err });
+                return res.send({ error: 'An error has occurred while sending away message: ' + err });
             });
         };
         findTrackingNumber();
