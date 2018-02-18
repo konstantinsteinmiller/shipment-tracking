@@ -8,10 +8,10 @@ How to run
 # Install dependencies
 npm install
 
-# Start development live-reload server on port 5000:
+# Start development live-reload server on port 5050:
 npm run dev
 
-# Start production server on port 5000:
+# Start production server on port 5050:
 npm start
 ```
 

@@ -181,6 +181,8 @@ export default {
       rules: {
         required: (value) => !!value || 'Required.',
         trackingNumber: (value) => {
+          /* tracking number must be exactly 13 characters long, be a string,
+           * and not contains any other character then a-z, A-Z and 0-9 */
           const n = value;
           const condition = n && typeof n === 'string' && n.length > 0 && (/[A-Za-z]{2}[\d]{9}[A-Za-z]{2}/.test(n) && (n.length === this.trackingNumberMaxLength))
           return !!condition || `A tracking number starts with 2 letters, is then followed by 9 alphanumerical numbers and ends with 2 additional letters. Its always ${ this.trackingNumberMaxLength } characters long`
@@ -189,18 +191,9 @@ export default {
     }
   },
   computed: {
-    /* tracking number must be exactly 13 characters long, be a string,
-     * and not contains any other character then a-z, A-Z and 0-9 */
-    validateTrackingNumber(){
-      const n = this.trackingNumber;
-      return n && typeof n === 'string' && n.length > 0 && (/[^\dA-Za-z]{1,}/.test(n) || (n.length > this.trackingNumberMaxLength))
-    },
-    id(){
-      return (this.$route && this.$route.query && this.$route.query.id) ? this.$route.query.id : '';
-    }
+    id(){ return (this.$route && this.$route.query && this.$route.query.id) ? this.$route.query.id : ''; }
   },
   beforeRouteUpdate(to, from, next){
-    // console.log('to.query', to.query)
     if(to.query && to.query.id) { this.trackingNumber = to.query.id; } //initialize from URL params if page is updated
     this.onInit(); //re-call the onInit method to trigger fetching status for tracking number
   },
