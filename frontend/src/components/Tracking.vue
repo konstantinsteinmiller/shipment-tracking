@@ -69,8 +69,7 @@
                                   <div>Last update: {{ new Date(lastRecentShipmentState.time).toLocaleString() }}</div>
                                   <div>Last shipment state: {{ lastRecentShipmentState.notice }}</div>
                                   <div>&nbsp;</div>
-                                  <div style="font-size: 12px">Notice: The globe mark the locations, where the shipment will</div>
-                                  <div style="font-size: 12px">be at given times.</div>
+                                  <div style="font-size: 12px">Notice: The globe mark the locations, where the shipment will be at given times.</div>
                                   <globe :states="trackingItem.states"></globe>
                                 </v-flex>
                               </v-layout>

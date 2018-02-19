@@ -196,6 +196,9 @@ export default function (data) {
 
     /* random serial digit derived from timestamp of max length 8 digits */
     let serialDigits = (new Date().getTime() % 100000000).toString(10)
+    let tooShortFix = "00000000" + serialDigits;
+    serialDigits = tooShortFix.substring(tooShortFix.length - 8)
+
     const s = serialDigits;
 
     /* checksum calculation by https://en.wikipedia.org/wiki/S10_(UPU_standard) */
@@ -204,6 +207,8 @@ export default function (data) {
     if (checkSumDigit == 10) checkSumDigit = 0;
     if (checkSumDigit == 11) checkSumDigit = 5;
 
+    console.log('checkSumDigit', checkSumDigit)
+    
     let countryCode = 'DE';
     switch(data.sourceAdress.country){
         case 'Deutschland': countryCode = 'DE';

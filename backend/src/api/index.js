@@ -75,7 +75,6 @@ export default ({ config, db }) => {
             generateUniqueTrackingNumber(data)
                 .then((result) => {
                     shipmentObj = result;
-                    console.log('shipmentObj', shipmentObj)
 
                     details = { trackingNumber: shipmentObj.trackingNumber }
                     return db.collection('shipment').findOne(details)

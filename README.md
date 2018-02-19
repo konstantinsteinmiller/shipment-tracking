@@ -3,6 +3,7 @@
 > Shipment tracking via a tracking number. Shows the current status and the history of the whereabouts of the shipment. 
 > You can send in new shipping request via the administration ui and update the status with the update status ui
 > UI is just available in english. Internalization was left out.
+> Fully responsive design.
 
 try out the hosted version here
 
