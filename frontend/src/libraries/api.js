@@ -24,6 +24,12 @@ export default class Api {
   }
 
 
+  wakeUpHerokuDyno(data){
+    return this.api.get('')
+      .then(parseJSON)
+      .catch(handleError)
+  }
+
   postTrackingNumber(data){
     return this.api.post('tracking', data)
       .then(parseJSON)

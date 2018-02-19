@@ -25,11 +25,12 @@ exports.default = function (_ref) {
     var api = (0, _express.Router)();
 
     // mount the facets resource
+    /* not used in code - obsolete */
     api.use('/facets', (0, _facets2.default)({ config: config, db: db }));
 
-    // perhaps expose some API metadata at the root
+    // just needed to wakeup the heroku app if it is sleeping after no accesses wihtin 1 hour
     api.get('/', function (req, res) {
-        res.status(200).json({ version: _package.version, text: 'some' });
+        return res.status(200).json({ message: 'wakeup' });
     });
 
     // get a tracking object with states etc. by tracking number

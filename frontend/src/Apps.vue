@@ -66,13 +66,34 @@
 </template>
 
 <script>
+  import Api, { handleError } from './libraries/api'
+  const api = new Api()
+
   export default {
     name: 'App',
     data: () => ({
+      sleepingTime: null,
       drawer: false
     }),
     props: {
       source: String
+    },
+    mounted(){
+      this.wakeUpHerokuDyno();
+    },
+    methods: {
+      wakeUpHerokuDyno(){
+        let now = new Date();
+        /* more than 59 minutes passed by or the state of the dyno is unknown -> restart dyno */
+        (!this.sleepingTime || (this.sleepingTime && (now - this.sleepingTime) > 3540000)) && api.wakeUpHerokuDyno()
+          .then((response) => {
+            this.sleepingTime = now;
+            console.log('dyno is running already!')
+          })
+          .catch((err) => {
+            console.log('dyno started on :: ' + now, err)
+          });
+      }
     }
   }
 </script>

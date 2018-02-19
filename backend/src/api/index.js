@@ -8,12 +8,11 @@ export default ({ config, db }) => {
     let api = Router();
 
     // mount the facets resource
+    /* not used in code - obsolete */
     api.use('/facets', facets({ config, db }));
 
-    // perhaps expose some API metadata at the root
-    api.get('/', (req, res) => {
-        res.status(200).json({ version, text: 'some' });
-    });
+    // just needed to wakeup the heroku app if it is sleeping after no accesses wihtin 1 hour
+    api.get('/', (req, res) => res.status(200).json({ message: 'wakeup' }));
 
     // get a tracking object with states etc. by tracking number
     api.get('/tracking', (req, res) => {
