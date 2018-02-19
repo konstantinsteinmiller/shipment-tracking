@@ -61,7 +61,7 @@
                           <v-flex xs12 >
                             <v-container fluid grid-list-lg >
                               <v-layout row>
-                                <v-flex xs12 class="text-xs-left" style="min-height: 28em; max-width: 30em;">
+                                <v-flex xs12 class="text-xs-left tracking__current-status">
 
                                   <div>Receiver: {{ trackingItem.targetAdress.name }}</div>
                                   <div>Tracking number: {{ trackingItem.trackingNumber }}</div>
@@ -299,14 +299,25 @@ export default {
 
 <style lang="stylus">
   .tracking
+    &__current-status
+      min-height 28em!important
+      max-width 30em!important
     &__history-panel
       margin-top 2em
     &__history-item--active
         background-color: #4CAF50!important
-        border-color: transparent !important;
+        border-color: transparent !important
       margin-top 2em
     &__history-table table.datatable
         background-color: #626262
-        border-color: transparent !important;
-
+        border-color: transparent !important
+@media (max-width: 1000px)
+  .tracking
+    &__current-status
+      max-width 23em!important
+@media (max-width: 800px)
+  .tracking
+    &__current-status
+      min-height 28em!important
+      max-width 100%!important
 </style>

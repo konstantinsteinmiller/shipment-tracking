@@ -59,17 +59,17 @@
   #container
     width 30em
     height 100%
-    /*position fixed*/
     position absolute
     float right
-    right 0px
+    right 0
     top 0
   @media (max-width: 800px)
     #container
       width 100%
-      height 40%
-      position absolute
-      left 40px
-      top 150px
+      height 30em
+      position relative
+      canvas
+        min-height 20em
+        width 100%
 
 </style>
