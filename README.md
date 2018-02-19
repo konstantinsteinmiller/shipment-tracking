@@ -5,17 +5,17 @@
 > UI is just available in english. Internalization was left out.
 > Fully responsive design.
 
-try out the hosted version here
+try out the hosted version [ShipTrack](http://steinmiller.bplaced.net/shiptrack/)
 
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-search.PNG)
+![shiptrack search](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-search.PNG)
 
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-tracking-globe.PNG)
+![shiptrack status](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-tracking-globe.PNG)
 
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-tracking.PNG)
+![shiptrack globe](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-tracking.PNG)
 
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-update.PNG)
+![shiptrack update](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-update.PNG)
 
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-admin.PNG)
+![shiptrack administration](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack-admin.PNG)
 
 ## 1 Build Setup
 ``` bash
@@ -24,12 +24,12 @@ to launch locally follow instructions in the /backend/readme.md and the /fronend
 
 ### 2 Workflow + Architecture
 
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack.jpg)
+![architecture](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/shiptrack.jpg)
 
 ##### 2.1 Technologies
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/MEVN.png)
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/vuetify.png)
-![alt text](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/three.jpg)
+![MEVN](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/MEVN.png)
+![Vuetify](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/vuetify.png)
+![three.js](https://raw.githubusercontent.com/konstantinsteinmiller/shipment-tracking/master/images/three.jpg)
 
 
 ### 3 Scenario

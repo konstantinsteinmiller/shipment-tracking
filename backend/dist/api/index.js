@@ -90,7 +90,6 @@ exports.default = function (_ref) {
         var findTrackingNumber = function findTrackingNumber() {
             (0, _tracking2.default)(data).then(function (result) {
                 shipmentObj = result;
-                console.log('shipmentObj', shipmentObj);
 
                 details = { trackingNumber: shipmentObj.trackingNumber };
                 return db.collection('shipment').findOne(details);
