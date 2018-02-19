@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "font-awesome-stylus": "^4.7.1",
+    "three": "^0.90.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuetify": "^0.17.7"

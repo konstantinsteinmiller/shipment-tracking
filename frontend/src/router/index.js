@@ -10,6 +10,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/',
+      redirect: 'tracking'
+    },
+    {
       path: '/tracking',
       name: 'Tracking',
       component: Tracking

@@ -3,4 +3,6 @@
 #09.02.2018 - 2h - mongodb setup
 #13.02.2018 - 10h - vuetify + tracking number generation
 #14.02.2018 - 10h - added update status ui and polished state display, finalized with tracking number safety check and cleared with some comments
-total: 29.5h 
+#16.02.2018 - 2h - hosting on heroku
+#18.02.2018 - 10h - geolocation added to cities, globe and responsiveness, tooShortString fix...
+total: 41.5h 

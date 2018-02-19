@@ -5,23 +5,26 @@ import generateUniqueTrackingNumber, { isValidTrackingNumber } from './tracking'
 
 
 export default ({ config, db }) => {
-	let api = Router();
+    let api = Router();
 
-	// mount the facets resource
-	api.use('/facets', facets({ config, db }));
+    // mount the facets resource
+    api.use('/facets', facets({ config, db }));
 
-	// perhaps expose some API metadata at the root
-	api.get('/', (req, res) => {
+    // perhaps expose some API metadata at the root
+    api.get('/', (req, res) => {
         res.status(200).json({ version, text: 'some' });
-	});
+    });
 
-	// get a tracking object with states etc. by tracking number
-	api.get('/tracking', (req, res) => {
-		// console.log('req.query: ', req.query);
+    // get a tracking object with states etc. by tracking number
+    api.get('/tracking', (req, res) => {
+        // console.log('req.query: ', req.query);
 
         /* opt out if the tracking number is not valid because of checksum */
-        if (!isValidTrackingNumber(req.query.trackingNumber)){
+        if (req.query.trackingNumber && !isValidTrackingNumber(req.query.trackingNumber)){
             res.status(200).json({ error: `The tracking number is invalid`});
+            return
+        }else if (!req.query.trackingNumber){
+            res.status(403).json({ error: `Pls provide a valid tracking number`});
             return
         }
 
@@ -32,56 +35,76 @@ export default ({ config, db }) => {
                 let json = (item) ? item : { error: `Could not find tracking information for ${req.query.trackingNumber}` }
                 res.status(200).json(json);
             }).catch(err => {
-                console.log('err', err)
-                res.json({ error: `An error has occurred while searching for ${req.query.trackingNumber} ${err}`});
-            });
-	}); 
+            console.log('err', err)
+            res.json({ error: `An error has occurred while searching for ${req.query.trackingNumber} ${err}`});
+        });
+    });
 
-	// create a new tracking number with mocked states data
-	api.post('/tracking', (req, res) => {
-		// console.log('req, res', req.body)
+    // create a new tracking number with mocked states data
+    api.post('/tracking', (req, res) => {
+        // console.log('req, res', req.body)
         if (!req || !req.body.shipmentType || !req.body.sourceAdress || !req.body.targetAdress) {
-        	console.log("something missing")
+            console.log("something missing")
             res.json({ error: `A shipment has to contain a shipmentType, 
 				        a sourceAdress and a targetAdress property`});
-        	return;
+            return;
         }
 
         const data = req.body;
-        /* in order to garantue a really unique tracking number in the database, we search for
+
+        /* Obviously 8 Digits doesn't span up a big enough range to create tracking numbers forever.
+         * Since I have no major knowledge of encoding and researching it was quite tedious,
+         * I went with the appoach to use a standard called S10 UPU
+         * like described on https://en.wikipedia.org/wiki/S10_(UPU_standard)
+         * I also added a safety mechanic that would look for collisions in the database
+         * and would regenerate a new tracking number.
+         *
+         * A considerable improvement of security would be to add 3-4 characters to the
+         * tracking number and then store these additional bits in the database.
+         * This would add a certain degree of security to the tracking number lookup.
+         *
+         * In order to garantue a really unique tracking number in the database, we search for
          * the generated tracking number within the db and generate a new tracking number
          * until there is no collision anymore. This approach assumes that the
-         * database is cleared or archived after a fixed period of time to continually allow
+         * database is cleared or archived after a fixed period of time to continually allow to
          * produce really unique tracking numbers and not run out of available slots.
+         * tl;dr;
          */
-		let shipmentObj, details;
+        let shipmentObj, details;
         let findTrackingNumber = () => {
-            shipmentObj = generateUniqueTrackingNumber(data)
-            details = { trackingNumber: shipmentObj.trackingNumber }
-            db.collection('shipment').findOne(details)
+            generateUniqueTrackingNumber(data)
+                .then((result) => {
+                    shipmentObj = result;
+
+                    details = { trackingNumber: shipmentObj.trackingNumber }
+                    return db.collection('shipment').findOne(details)
+                })
                 .then(item => {
                     /* if an item with this tracking number was found, it is found in item
                      * otherwise its null and we generate a new tracking number recursively
                      */
-                    item !== null && findTrackingNumber()
-
+                    if (item !== null){
+                        findTrackingNumber()
+                        return
+                    }
                     return db.collection('shipment').insertOne(shipmentObj)
                 })
                 .catch(err => console.log({ error: `An error has occurred while inserting: ${err}`  }))
                 .then(result => {
                     /* resolve of db.collection('shipment').insertOne(shipmentObj) */
-                    console.log('result.ops', result && result.ops)
+                    // console.log('result.ops', result && result.ops)
                     result && result.ops && result.ops.length
                     && res.json({ data: result.ops[0], trackingNumber: shipmentObj.trackingNumber });
                 })
-                .catch(err => res.send({ error: `An error has occurred while inserting: ${err}`  }))
+                .catch(err => res.send({ error: `An error has occurred while sending away message: ${err}`  }))
+
         }
         findTrackingNumber();
 
-	});
+    });
 
-	/* update existing shipment by tracking number, notice and state to update */
-	api.put('/tracking', (req, res) => {
+    /* update existing shipment by tracking number, notice and state to update */
+    api.put('/tracking', (req, res) => {
         const details = { 'trackingNumber': req.body.trackingNumber }; /* db search argument */
         const trackingItem = req.body;
 
@@ -107,9 +130,9 @@ export default ({ config, db }) => {
                 console.log('err', err)
                 res.status(404).json({ error: `${trackingItem.trackingNumber} not found. ${err}`});
             });
-            /* perfectly chain it to avoid callback hell */
+        /* perfectly chain it to avoid callback hell */
 
-	});
+    });
 
-	return api;
+    return api;
 }
