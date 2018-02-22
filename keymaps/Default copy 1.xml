@@ -1,4 +1,8 @@
 <keymap version="1" name="Default copy 1" parent="$default">
+  <action id="$Redo">
+    <keyboard-shortcut first-keystroke="shift alt back_space" />
+    <keyboard-shortcut first-keystroke="ctrl y" />
+  </action>
   <action id="CommentByBlockComment">
     <keyboard-shortcut first-keystroke="shift ctrl slash" />
     <keyboard-shortcut first-keystroke="shift ctrl divide" />
@@ -10,9 +14,13 @@
     <keyboard-shortcut first-keystroke="ctrl dead_circumflex" />
   </action>
   <action id="DuplicatesForm.SendToLeft" />
+  <action id="Editor Redo">
+    <keyboard-shortcut first-keystroke="ctrl y" />
+  </action>
   <action id="EditorDecreaseFontSize">
     <keyboard-shortcut first-keystroke="shift ctrl alt minus" />
   </action>
+  <action id="EditorDeleteLine" />
   <action id="EditorIncreaseFontSize">
     <keyboard-shortcut first-keystroke="shift ctrl alt plus" />
   </action>
