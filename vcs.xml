@@ -18,9 +18,13 @@
           <option name="url" value="https://github.com/GeekyAnts/vue-js-animation-starter-kit" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/konstantinsteinmiller/mevnv" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="C:\Users\Eternal\Desktop\codeCompetition\VSCode\vue-loginpage-with-nice-animation" />
+    <option name="cloneParentDir" value="C:\Users\Eternal\Desktop\codeCompetition\" />
   </component>
   <component name="Vcs.Log.App.Settings">
     <option name="MIGRATED" value="true" />
