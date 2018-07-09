@@ -26,6 +26,10 @@
           <option name="url" value="https://github.com/vuetifyjs/pwa" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="evorim@git.evorim.com:ed/GustoApp.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\Eternal\Desktop\codeCompetition" />
