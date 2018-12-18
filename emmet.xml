@@ -197,7 +197,7 @@
         <entry key="transform-origin-y" value="4" />
         <entry key="transform-origin-z" value="4" />
         <entry key="transform-style" value="7" />
-        <entry key="transition" value="15" />
+        <entry key="transition" value="0" />
         <entry key="transition-delay" value="15" />
         <entry key="transition-duration" value="15" />
         <entry key="transition-property" value="15" />
