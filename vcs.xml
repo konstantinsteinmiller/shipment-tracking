@@ -46,8 +46,12 @@
           <option name="url" value="https://github.com/michaelpollmann/LoA" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/agrando-de/agr-animal-frontend.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="C:\Users\Eternal\Desktop\G2\_work" />
+    <option name="cloneParentDir" value="C:\Users\Eternal\agrando" />
   </component>
 </application>
