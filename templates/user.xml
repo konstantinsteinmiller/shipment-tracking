@@ -569,4 +569,25 @@
       <option name="XML" value="false" />
     </context>
   </template>
+  <template name="obj" value="{&#10;  $END$&#10;}" description="position: absolute" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="ACTION_SCRIPT" value="false" />
+      <option name="Bash" value="false" />
+      <option name="CUCUMBER_FEATURE_FILE" value="false" />
+      <option name="CoffeeScript" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JAVA_CODE" value="false" />
+      <option name="JSON" value="false" />
+      <option name="KOTLIN" value="false" />
+      <option name="LUA" value="false" />
+      <option name="MAVEN" value="false" />
+      <option name="MXML" value="false" />
+      <option name="OTHER" value="true" />
+      <option name="PHP" value="false" />
+      <option name="REQUEST" value="false" />
+      <option name="Twig" value="false" />
+      <option name="TypeScript" value="false" />
+      <option name="XML" value="false" />
+    </context>
+  </template>
 </templateSet>
