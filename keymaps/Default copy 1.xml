@@ -26,4 +26,7 @@
   </action>
   <action id="FileChooser.GotoHome" />
   <action id="GotoBookmark1" />
+  <action id="Javascript.Linters.EsLint.Fix">
+    <mouse-shortcut keystroke="control button3 doubleClick" />
+  </action>
 </keymap>
