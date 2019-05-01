@@ -97,4 +97,12 @@
       <option name="VUE_TEMPLATE" value="true" />
     </context>
   </template>
+  <template name="int" value="${$clip$}" description="render" toReformat="true" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="VUE_TEMPLATE" value="true" />
+    </context>
+  </template>
 </templateSet>
