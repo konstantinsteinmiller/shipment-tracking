@@ -1,0 +1,7 @@
+<templateSet group="Vue">
+  <template name="sty" value="&lt;style lang=&quot;sass&quot;&gt;&#10;&#10;&lt;/style&gt;" description="style tag" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="VUE_TEMPLATE" value="true" />
+    </context>
+  </template>
+</templateSet>
