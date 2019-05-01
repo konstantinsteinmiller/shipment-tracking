@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/config/google.js"],"names":["google","key"],"mappings":";;;;;AAAO,IAAMA,0BAAS;AAClBC,SAAK;AADa,CAAf","file":"google.js","sourcesContent":["export const google = {\r\n    key: 'AIzaSyAaboPPOB1IVkLSkWGVdTU8r37OCY4IZKQ'\r\n}\r\n"]}
