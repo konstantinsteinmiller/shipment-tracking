@@ -1,29 +1,26 @@
 <templateSet group="JavaScript">
-  <template name="dump" value="console.log('$END$$Clipboard$', $Clipboard$)" description="" toReformat="false" toShortenFQNames="true">
-    <variable name="Clipboard" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+  <template name="nmvue" value="require('./nm-FancyButton.styl');&#10;&#10;var NmFancyButton = {&#10;&#9;template: require('./nm-FancyButton.vue.html'),&#10;&#9;props: {&#10;&#9;&#9;/*type: {&#10;&#9;&#9;&#9;'type': String,&#10;&#9;&#9;&#9;'default': ''&#10;&#9;&#9;}*/&#10;&#9;},&#10;&#9;data: function () {&#10;&#9;&#9;return {};&#10;&#9;},&#10;&#9;methods: {&#10;&#9;&#9;/*click: function() {&#10;&#9;&#9;&#9;if(!this.disabled) {&#10;&#9;&#9;&#9;&#9;this.$emit('click', this);&#10;&#9;&#9;&#9;}&#10;&#9;&#9;}*/&#10;&#9;}&#10;};&#10;&#10;module.exports = NmFancyButton;&#10;" shortcut="TAB" description="NMVue Komponente" toReformat="true" toShortenFQNames="true" />
+  <template name="maf" value="map((el) =&gt; {&#10;   return $END$;&#10;})" description="ES6 arrow func" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="foe" value="forEach(($END$) =&gt; { &#10;    $Clipboard$&#10;    return undefined &#10;})" description="forEach ES6" toReformat="false" toShortenFQNames="true">
-    <variable name="Clipboard" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+  <template name=".fi" value=".filter((el) =&gt; {&#10;   return $END$;&#10;})" description="ES6 fi" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="print" value="console.log('$END$$Clipboard$', &#10;            $Clipboard$ &amp;&amp; JSON.stringify($Clipboard$))" description="print pretty" toReformat="false" toShortenFQNames="true">
-    <variable name="Clipboard" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+  <template name=".fo" value=".forEach((el, index) =&gt; {&#10;   $END$;&#10;})" description="ES6 arrow forEach" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="mapp" value="map(($END$) =&gt; { &#10;    $Clipboard$&#10;    return undefined &#10;})" description="map ES6" toReformat="false" toShortenFQNames="true">
-    <variable name="Clipboard" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="isa" value="constructor === Array" description="isArray" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="copy" value="JSON.parse(JSON.stringify($Clipboard$))" description="" toReformat="false" toShortenFQNames="true">
+  <template name="obt" value="{ label: $Clipboard$, value: $Clipboard$ },$END$" description="create nm-select object" toReformat="false" toShortenFQNames="true">
     <variable name="Clipboard" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />

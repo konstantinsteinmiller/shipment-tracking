@@ -4,21 +4,48 @@
     <keyboard-shortcut first-keystroke="shift alt back_space" />
     <keyboard-shortcut first-keystroke="ctrl y" />
   </action>
+  <action id="ActivateDebugToolWindow" />
+  <action id="ActivateFavoritesToolWindow" />
+  <action id="ActivateStructureToolWindow" />
+  <action id="ActivateTODOToolWindow" />
+  <action id="ActivateTerminalToolWindow" />
+  <action id="ActivateVersionControlToolWindow" />
+  <action id="CollapseAllRegions">
+    <keyboard-shortcut first-keystroke="ctrl alt w" />
+  </action>
+  <action id="CollapseRegion">
+    <keyboard-shortcut first-keystroke="ctrl alt 3" />
+  </action>
   <action id="CommentByBlockComment">
     <keyboard-shortcut first-keystroke="ctrl 1" />
   </action>
   <action id="CommentByLineComment">
     <keyboard-shortcut first-keystroke="ctrl dead_circumflex" />
+    <keyboard-shortcut first-keystroke="ctrl 2" />
   </action>
   <action id="DuplicatesForm.SendToLeft" />
+  <action id="DuplicatesForm.SendToRight" />
   <action id="Editor Redo">
     <keyboard-shortcut first-keystroke="ctrl y" />
   </action>
   <action id="EditorDeleteLine">
     <keyboard-shortcut first-keystroke="shift ctrl y" />
   </action>
+  <action id="EditorPasteFromX11" />
+  <action id="ExpandAllRegions" />
+  <action id="ExpandRegion">
+    <keyboard-shortcut first-keystroke="ctrl alt q" />
+  </action>
   <action id="FileChooser.GotoHome" />
+  <action id="FileChooser.GotoProject" />
   <action id="GotoBookmark1" />
+  <action id="GotoBookmark2" />
+  <action id="Javascript.Linters.EsLint.Fix">
+    <mouse-shortcut keystroke="control button3 doubleClick" />
+  </action>
+  <action id="QuickJavaDoc">
+    <keyboard-shortcut first-keystroke="ctrl q" />
+  </action>
   <action id="SwitchApply">
     <keyboard-shortcut first-keystroke="shift alt enter" />
   </action>

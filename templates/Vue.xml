@@ -1,74 +1,275 @@
 <templateSet group="Vue">
-  <template name="sty" value="&lt;style lang=&quot;sass&quot;&gt;&#10;&#10;&lt;/style&gt;" description="style tag" toReformat="true" toShortenFQNames="true">
+  <template name="rend" value="{{ $clip$ }}$END$" description="render variable" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <context>
-      <option name="CSS" value="true" />
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="divcl" value="&lt;div class=&quot;$END$&quot;&gt;&#10;&#10;&lt;/div&gt;" description="div with class" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="spancl" value="&lt;span class=&quot;$END$&quot;&gt;&lt;/span&gt;" description="span with class" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="ulcl" value="&lt;ul class=&quot;$END$&quot;&gt;&lt;/ul&gt;" description="ul wiht class" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="licl" value="&lt;li class=&quot;$END$&quot;&gt;&lt;/li&gt;" description="" toReformat="false" toShortenFQNames="true" />
+  <template name="vdata" value="&#10;data() {&#10;  return {&#10;    $END$&#10;  }&#10;},&#10;" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="impp" value="import $clipboard$ from ''" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="clipboard" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="vcomp" value="components: {&#10;  $clipboard$&#10;  $END$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="clipboard" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="rendprint" value="&lt;pre&gt;{{ JSON.stringify($clip$ ,undefined, 2) }}&lt;/pre&gt;" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="tbool" value="$clip$: { &#10;  type: Boolean,&#10;  default: false&#10;}$END$" description="bool prop" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
       <option name="HTML" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="VUE_TEMPLATE" value="true" />
+      <option name="Vue" value="true" />
     </context>
   </template>
-  <template name="svgi" value="&lt;svg&gt;&#10;  &lt;use xlink:href=&quot;@/assets/svg/sprite.svg#icon-$END$&quot;&gt;&lt;/use&gt;&#10;&lt;/svg&gt;" description="style tag" toReformat="true" toShortenFQNames="true">
-    <context>
-      <option name="VUE_TEMPLATE" value="true" />
-    </context>
-  </template>
-  <template name="fsl" value="&lt;template slot=&quot;$END$&quot;&gt;&#10;  $clip$&#10;&lt;/template&gt;" description="style tag" toReformat="true" toShortenFQNames="true">
+  <template name="tstring" value="$clip$: { &#10;  type: String,&#10;  default: ''&#10;}$END$" description="string prop" toReformat="false" toShortenFQNames="true">
     <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <context>
-      <option name="VUE_TEMPLATE" value="true" />
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
     </context>
   </template>
-  <template name="scriptsec" value="&lt;script&gt;$END$&#10;export default {&#10;  components: { $clip$ }&#10;}&#10;&lt;/script&gt;" description="script tag" toReformat="true" toShortenFQNames="true">
+  <template name="tobj" value="$clip$: { &#10;  type: Object,&#10;  default: () =&gt; {&#10;    return {}&#10;  }&#10;}$END$" description="object prop" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="tarr" value="$clip$: { &#10;  type: Array,&#10;  default: () =&gt; {&#10;    return []&#10;  }&#10;}$END$" description="array prop" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name=":c" value=":class=&quot;$END$&quot;" description="bool prop" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="iat" value="import $clip$ from '@/components/atoms/$clip$'$END$" description="bool prop" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="compo" value="components: { $clip$ },&#10;$END$&#10;" description="components section" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="fsl" value="&lt;template slot=&quot;$END$&quot;&gt;&#10;  $clip$&#10;&lt;/template&gt;&#10;" description="bool prop" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="scriptsec" value="&lt;script&gt;&#10;import $clip$ from '@/components/atoms/$clip$'&#10;&#10;export default {&#10;  components: { $clip$ }&#10;}&#10;&lt;/script&gt;" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="fum" value="$clip$() {&#10;  return $END$ &#10;}" description="bool prop" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="sty" value="&lt;style lang=&quot;scss&quot; scoped&gt;&#10;@import '~@/assets/scss/variables';&#10;&#10;$END$&#10;&lt;/style&gt;" description="bool prop" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="ar" value="[$clip$$END$]" description="cunty brackets" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="ar0" value="[$END$0]" description="cunty brackets" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="v-f" value="v-for=&quot;(item, index) in $clip$items&quot; :key=&quot;index&quot;,&#10;$END$&#10;" description="v-for loop" toReformat="false" toShortenFQNames="true">
     <variable name="clip" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
-      <option name="VUE_TEMPLATE" value="true" />
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
     </context>
   </template>
-  <template name="scripts" value="&lt;script&gt;&#10;export default {&#10;  $END$&#10;}&#10;&lt;/script&gt;" description="script tag" toReformat="true" toShortenFQNames="true">
+  <template name="keb" value="$kebap$$END$" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="kebap" expression="lowercaseAndDash(clipboard())" defaultValue="" alwaysStopAt="false" />
     <context>
-      <option name="VUE_TEMPLATE" value="true" />
+      <option name="ACTION_SCRIPT" value="false" />
+      <option name="ASPECTJ" value="false" />
+      <option name="CSS" value="false" />
+      <option name="CUCUMBER_FEATURE_FILE" value="false" />
+      <option name="CoffeeScript" value="false" />
+      <option name="ColdFusion" value="false" />
+      <option name="Django" value="false" />
+      <option name="ECMAScript6" value="false" />
+      <option name="GROOVY" value="false" />
+      <option name="GSP" value="false" />
+      <option name="HAML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JAVA_CODE" value="false" />
+      <option name="JSON" value="false" />
+      <option name="JSP" value="false" />
+      <option name="KOTLIN" value="false" />
+      <option name="MAVEN" value="false" />
+      <option name="MXML" value="false" />
+      <option name="OGNL" value="false" />
+      <option name="OTHER" value="true" />
+      <option name="Python" value="false" />
+      <option name="REQUEST" value="false" />
+      <option name="SQL" value="false" />
+      <option name="TypeScript" value="false" />
+      <option name="XML" value="false" />
     </context>
   </template>
-  <template name="compo" value="components: { $clip$ $END$ }" description="component prop" toReformat="true" toShortenFQNames="true">
-    <variable name="clip" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="cap" value="$cname$$END$" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="cname" expression="capitalize(clipboard())" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="VUE_TEMPLATE" value="true" />
+      <option name="Vue" value="true" />
     </context>
   </template>
-  <template name="iat" value="import $clip$ from '@/components/atoms/$clip$'" description="import atoms" toReformat="true" toShortenFQNames="true">
-    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="VUE_TEMPLATE" value="true" />
-    </context>
-  </template>
-  <template name="imt" value="import $clip$ from '@/components/molecules/$clip$'" description="import molecules" toReformat="true" toShortenFQNames="true">
-    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="VUE_TEMPLATE" value="true" />
-    </context>
-  </template>
-  <template name="iot" value="import $clip$ from '@/components/organisms/$clip$'" description="import organisms" toReformat="true" toShortenFQNames="true">
-    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="VUE_TEMPLATE" value="true" />
-    </context>
-  </template>
-  <template name="keb" value="$kebab$" description="to kebab" toReformat="true" toShortenFQNames="true">
-    <variable name="kebab" expression="lowercaseAndDash(clipboard())" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="VUE_TEMPLATE" value="true" />
-    </context>
-  </template>
-  <template name="cam" value="$camel$" description="to snake" toReformat="true" toShortenFQNames="true">
+  <template name="cam" value="$camel$$END$" description="" toReformat="false" toShortenFQNames="true">
     <variable name="camel" expression="camelCase(clipboard())" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="VUE_TEMPLATE" value="true" />
+      <option name="Vue" value="true" />
     </context>
+  </template>
+  <template name="arr" value="['$clip$'$END$]" description="cunty brackets" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="arf" value="() =&gt; { $END$ }" description="empty lambda" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="nfu" value="function() { &#10;  $clip$$END$ &#10;}" description="empty lambda" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="con" value="const $clip$ = $END$" description="cunty brackets" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="capa" value="$camel$ $END$" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="camel" expression="capitalize(camelCase(clipboard()))" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="imt" value="import $clip$ from '@/components/molecules/$clip$'$END$" description="bool prop" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="iot" value="import $clip$ from '@/components/organisms/$clip$'$END$" description="bool prop" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="s" value="'$clip$'$END$" description="cunty brackets" toReformat="false" toShortenFQNames="true">
+    <variable name="clip" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="lorem" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." description="lorem" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
+  <template name="vmethod" value="methods: {&#10; $name$() {&#10;  $END$&#10; }&#10;}" description="Vue method" toReformat="true" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="&quot;name&quot;" alwaysStopAt="true" />
+    <context />
   </template>
 </templateSet>

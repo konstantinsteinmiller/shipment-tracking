@@ -1,0 +1,10 @@
+<application>
+  <component name="XPathView.XPathViewPlugin">
+    <option name="SEARCH_SCOPE">
+      <SearchScope scope-name="All Places" type="DIRECTORY">
+        <moduleName>Clood</moduleName>
+        <path>C:\Users\Eternal\Desktop\WebGL\Clood</path>
+      </SearchScope>
+    </option>
+  </component>
+</application>

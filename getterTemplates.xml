@@ -1,0 +1,13 @@
+<application>
+  <component name="GetterTemplates">
+    <option name="defaultTempalteName" value="nmtemplate" />
+    <option name="templates">
+      <list>
+        <TemplateResource>
+          <option name="fileName" value="nmtemplate" />
+          <option name="template" value="public ##&#10;#if($field.modifierStatic)&#10;  static ##&#10;#end&#10;$field.type ##&#10;#set($name = $StringUtil.capitalizeWithJavaBeanConvention($StringUtil.sanitizeJavaIdentifier($helper.getPropertyName($field, $project))))&#10;#if ($field.boolean &amp;&amp; $field.primitive)&#10;  #if ($StringUtil.startsWithIgnoreCase($name, 'is'))&#10;    #set($name = $StringUtil.decapitalize($name))&#10;  #else&#10;    is##&#10;#end&#10;#else&#10;  get##&#10;#end&#10;${name}() {&#10;  return this.$field.name;&#10;}" />
+        </TemplateResource>
+      </list>
+    </option>
+  </component>
+</application>
