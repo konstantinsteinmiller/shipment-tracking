@@ -272,4 +272,11 @@
     <variable name="name" expression="" defaultValue="&quot;name&quot;" alwaysStopAt="true" />
     <context />
   </template>
+  <template name="scripts" value="&lt;script&gt;&#10;export default {&#10;  props: {$END$}&#10;}&#10;&lt;/script&gt;" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="Vue" value="true" />
+    </context>
+  </template>
 </templateSet>
